@@ -77,7 +77,7 @@ export function HeroSection() {
                     className="drop-shadow-[0_0_30px_rgba(236,72,153,0.4)] w-auto"
                   />
                 </div>
-                <div className="relative z-20 transform rotate-6 hover:rotate-0 transition-transform duration-500 -ml-8 sm:-ml-16">
+                <div className="relative z-20 transform rotate-6 hover:rotate-0 transition-transform duration-500 -ml-4 sm:-ml-12">
                   <Image
                     src="/images/badempiredarkroast1-transparent.png"
                     alt="Nightfall of the Obsidian Crown - Dark Roast"

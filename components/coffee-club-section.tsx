@@ -130,8 +130,8 @@ export function CoffeeClubSection() {
                 <Button
                   className={`w-full font-bold py-5 md:py-6 text-sm md:text-lg rounded-xl transition-all duration-300 hover:scale-105 ${
                     tier.featured
-                      ? "bg-gradient-to-r from-neon-gold to-amber-500 hover:from-neon-gold/90 hover:to-amber-500/90 text-background shadow-[0_0_30px_rgba(212,175,55,0.5)]"
-                      : "bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white shadow-[0_0_30px_rgba(236,72,153,0.5)]"
+                      ? "bg-gradient-to-r from-neon-gold to-amber-500 hover:from-neon-gold/90 hover:to-amber-500/90 text-background hover:text-background shadow-[0_0_30px_rgba(212,175,55,0.5)]"
+                      : "bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white hover:text-white shadow-[0_0_30px_rgba(236,72,153,0.5)]"
                   }`}
                 >
                   {tier.buttonText}
