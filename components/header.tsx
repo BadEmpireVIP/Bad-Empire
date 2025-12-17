@@ -20,7 +20,7 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-neon-pink/20">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
@@ -28,7 +28,7 @@ export function Header() {
               alt="Bad Empire Logo"
               width={120}
               height={80}
-              className="h-16 w-auto drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
+              className="h-12 md:h-16 w-auto drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
             />
           </Link>
 
@@ -46,8 +46,12 @@ export function Header() {
           </nav>
 
           {/* Cart & Mobile Menu */}
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative text-foreground hover:text-neon-cyan">
+          <div className="flex items-center gap-2 md:gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-foreground hover:text-neon-cyan h-10 w-10 md:h-11 md:w-11"
+            >
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-neon-pink text-background text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                 0
@@ -57,7 +61,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-foreground"
+              className="md:hidden text-foreground h-10 w-10"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -72,7 +76,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-3 text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-sm"
+                className="block py-3 px-2 text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-sm"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
