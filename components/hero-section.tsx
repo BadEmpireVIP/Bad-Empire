@@ -66,7 +66,7 @@ export function HeroSection() {
               <div className="relative flex items-center justify-center gap-[-20px]">
                 <div className="relative z-10 transform -rotate-6 hover:rotate-0 transition-transform duration-500">
                   <Image
-                    src="/images/badempirelightroast1.png"
+                    src="/images/badempirelightroast-transparent.png"
                     alt="Sunblade of the East - Light Roast"
                     width={280}
                     height={400}
@@ -75,7 +75,7 @@ export function HeroSection() {
                 </div>
                 <div className="relative z-20 transform rotate-6 hover:rotate-0 transition-transform duration-500 -ml-16">
                   <Image
-                    src="/images/badempiredarkroast1.png"
+                    src="/images/badempiredarkroast1-transparent.png"
                     alt="Nightfall of the Obsidian Crown - Dark Roast"
                     width={280}
                     height={400}
