@@ -214,6 +214,7 @@ export function HeroSection() {
                     ref={videoRef}
                     muted
                     playsInline
+                    loop
                     className="w-full max-w-md h-auto rounded-xl border border-neon-cyan/30 transition-opacity duration-500"
                     onTimeUpdate={(e) => {
                       if (e.currentTarget.currentTime >= 15) {
@@ -222,6 +223,7 @@ export function HeroSection() {
                     }}
                   >
                     <source src={slide.video} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                 )}
                 {"image" in slide && slide.image && (

@@ -297,7 +297,7 @@ export const metadata: Metadata = {
       "Join the Empire. Premium coffee subscriptions, French Bulldog breeding, barber services, custom jewelry, dart leagues, and gaming in Upstate New York. Serving Albany, Troy, Watervliet, and the Capital Region.",
     images: [
       {
-        url: "/images/socialsharing.png",
+        url: `${siteUrl}/images/socialsharing.png`,
         width: 1200,
         height: 630,
         alt: "Bad Empire Coffee Club - Premium Coffee & Lifestyle Club",
@@ -312,7 +312,7 @@ export const metadata: Metadata = {
     title: "Bad Empire Coffee Club | Premium Coffee & Lifestyle | Albany NY",
     description:
       "Join the Empire. Premium coffee, French Bulldogs, barber services, jewelry, darts, and gaming in Upstate New York.",
-    images: ["/images/socialsharing.png"],
+    images: [`${siteUrl}/images/socialsharing.png`],
     creator: "@badempireclub",
     site: "@badempireclub",
   },
