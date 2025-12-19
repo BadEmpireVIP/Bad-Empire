@@ -36,7 +36,6 @@ export function HeroSection() {
       title: "Bad Empire Club",
       subtitle: "French Bulldog Community and Social",
       content: "Join our community of coffee lovers, frenchie enthusiasts, dart players, and friends in NY.",
-      image: "/images/frenchbulldog1tp.png",
       cta1: { text: "Membership Plans", action: () => handleCTA("Membership clicked") },
       cta2: { text: "Learn More", action: () => handleCTA("Learn more clicked") },
     },
@@ -231,17 +230,6 @@ export function HeroSection() {
                     <source src={slide.video} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
-                )}
-                {"image" in slide && slide.image && (
-                  <div className="relative -ml-20 lg:-ml-32 w-48 h-72 md:w-56 md:h-80 lg:w-64 lg:h-96">
-                    <Image
-                      src={slide.image || "/placeholder.svg"}
-                      alt={slide.title}
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
                 )}
               </div>
             </div>

@@ -66,7 +66,7 @@ export function AboutSection() {
                         <feature.icon className="h-5 w-5 text-neon-pink" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-foreground mb-1">{feature.title}</h4>
+                        <h4 className="text-lg font-bold text-foreground mb-1">{feature.title}</h4>
                         <p className="text-sm text-foreground/60">{feature.description}</p>
                       </div>
                     </div>
@@ -76,7 +76,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Logo Display */}
+          {/* Logo Display with French Bulldog */}
           <div className="relative">
             <div className="relative flex items-center justify-center">
               {/* Glow Effect */}
@@ -90,6 +90,15 @@ export function AboutSection() {
                   width={400}
                   height={300}
                   className="drop-shadow-[0_0_50px_rgba(236,72,153,0.5)]"
+                />
+              </div>
+
+              <div className="absolute -bottom-12 -right-8 w-40 h-40 md:w-52 md:h-52 opacity-90 hover:opacity-100 transition-opacity">
+                <Image
+                  src="/images/frenchbulldog1tp.png"
+                  alt="Bad Empire French Bulldog"
+                  fill
+                  className="object-contain drop-shadow-[0_0_30px_rgba(236,72,153,0.4)]"
                 />
               </div>
             </div>
