@@ -203,8 +203,8 @@ export function HeroSection() {
                       index === 0
                         ? "w-40 sm:w-56 md:w-64 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-40 sm:w-56 md:w-80 lg:w-96 image-float"
-                          : "w-48 sm:w-64 md:w-full lg:w-full image-pulse"
+                          ? "w-40 sm:w-56 md:w-64 lg:w-80 image-float"
+                          : "w-48 sm:w-64 md:w-96 lg:w-full image-pulse"
                     }`}
                   />
                 </div>
