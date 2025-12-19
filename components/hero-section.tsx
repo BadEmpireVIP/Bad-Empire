@@ -10,7 +10,7 @@ const slides = [
     title: "Bad Empire Coffee Club",
     subtitle: "Join Our Exclusive Community",
     description: "Experience the finest specialty coffee with our membership",
-    image: "/images/badempirecoffeeclub.png",
+    image: "/images/coloredcoffeeclub.png",
     cta1: { text: "Join Club", action: () => console.log("Join club clicked") },
     cta2: { text: "Learn More", action: () => console.log("Learn more clicked") },
     background: "url(/images/badempirebg1.jpg)",
@@ -79,69 +79,6 @@ function Sparkles({ active }) {
   }, [active])
 
   return <div ref={containerRef} className="absolute inset-0 w-full h-full" />
-}
-
-function MultiSparkles({ active }) {
-  // Positions: top-left (behind), top-right (front), bottom-left (behind), bottom-right (front), center (behind)
-  const sparklePositions = [
-    { top: "-40px", left: "-60px", zIndex: -1 }, // Behind - top-left
-    { top: "-30px", right: "-50px", zIndex: 10 }, // Front - top-right
-    { bottom: "-50px", left: "-40px", zIndex: 10 }, // Front - bottom-left
-    { bottom: "-30px", right: "-60px", zIndex: -1 }, // Behind - bottom-right
-    { top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: -1 }, // Behind - center
-  ]
-
-  return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none">
-      {sparklePositions.map((position, idx) => (
-        <SparklesLayer key={idx} active={active} position={position} />
-      ))}
-    </div>
-  )
-}
-
-function SparklesLayer({ active, position }) {
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    if (!active || !containerRef.current) return
-
-    const createSparkle = () => {
-      const sparkle = document.createElement("div")
-      sparkle.className = "sparkle"
-
-      // Random position around a circle
-      const angle = Math.random() * Math.PI * 2
-      const radius = 40 + Math.random() * 50
-      const tx = Math.cos(angle) * radius
-      const ty = Math.sin(angle) * radius
-
-      sparkle.style.setProperty("--tx", `${tx}px`)
-      sparkle.style.setProperty("--ty", `${ty}px`)
-
-      const randomDelay = Math.random() * 0.5
-      sparkle.style.animationDelay = `${randomDelay}s`
-
-      containerRef.current?.appendChild(sparkle)
-
-      setTimeout(() => sparkle.remove(), 2000)
-    }
-
-    const interval = setInterval(createSparkle, 400)
-    return () => clearInterval(interval)
-  }, [active])
-
-  return (
-    <div
-      ref={containerRef}
-      className="absolute w-full h-full"
-      style={{
-        ...position,
-        width: "200px",
-        height: "200px",
-      }}
-    />
-  )
 }
 
 export function HeroSection() {
@@ -245,7 +182,7 @@ export function HeroSection() {
                 {/* Right Content - Images with Sparkles */}
                 <div className="relative h-full hidden md:flex items-center justify-center">
                   <div className="relative">
-                    {index === 3 && <MultiSparkles active={index === currentSlide} />}
+                    {index === 3 && <Sparkles active={index === currentSlide} />}
                     <img
                       src={s.image || "/placeholder.svg"}
                       alt={s.title}
