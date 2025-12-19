@@ -13,10 +13,10 @@ const products = [
     name: "Sunblade of the East",
     roast: "Light Roast",
     description:
-      "Roasted for the early watch on the city walls. Bright, citrusy, and smooth—perfect for the dawn patrol.",
+      "Roasted for the early watch on the city walls. Bright, citrusy, and smooth perfect for the dawn patrol.",
     flavorNotes: ["Citrus", "Honey", "Floral"],
     price: 18.99,
-    image: "/images/badempirelightroast1.png",
+    image: "/images/badempirelightroast-transparent.png",
     icon: Sun,
     accentColor: "neon-gold",
   },
@@ -25,10 +25,10 @@ const products = [
     name: "Nightfall of the Obsidian Crown",
     roast: "Dark Roast",
     description:
-      "Brewed for council meetings held after midnight. Bold, chocolatey, and smoky—fuel for the night watch.",
+      "Brewed for council meetings held after midnight. Bold, chocolatey, and smoky fuel for the night watch.",
     flavorNotes: ["Dark Chocolate", "Smoky", "Caramel"],
     price: 19.99,
-    image: "/images/badempiredarkroast1.png",
+    image: "/images/badempiredarkroast1-transparent.png",
     icon: Moon,
     accentColor: "neon-purple",
   },
@@ -36,12 +36,25 @@ const products = [
 
 export function ProductsSection() {
   const [quantities, setQuantities] = useState<Record<number, number>>({ 1: 1, 2: 1 })
+  const [cart, setCart] = useState<Array<{ id: number; quantity: number }>>([])
 
   const updateQuantity = (id: number, delta: number) => {
     setQuantities((prev) => ({
       ...prev,
       [id]: Math.max(1, (prev[id] || 1) + delta),
     }))
+  }
+
+  const handleAddToCart = (productId: number) => {
+    const quantity = quantities[productId] || 1
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === productId)
+      if (existingItem) {
+        return prevCart.map((item) => (item.id === productId ? { ...item, quantity: item.quantity + quantity } : item))
+      }
+      return [...prevCart, { id: productId, quantity }]
+    })
+    console.log(`[v0] Added ${quantity} of product ${productId} to cart`)
   }
 
   return (
@@ -138,6 +151,7 @@ export function ProductsSection() {
                           size="icon"
                           className="h-8 w-8 text-foreground/70 hover:text-foreground"
                           onClick={() => updateQuantity(product.id, -1)}
+                          aria-label="Decrease quantity"
                         >
                           <Minus className="h-4 w-4" />
                         </Button>
@@ -149,13 +163,18 @@ export function ProductsSection() {
                           size="icon"
                           className="h-8 w-8 text-foreground/70 hover:text-foreground"
                           onClick={() => updateQuantity(product.id, 1)}
+                          aria-label="Increase quantity"
                         >
                           <Plus className="h-4 w-4" />
                         </Button>
                       </div>
 
                       {/* Add to Cart */}
-                      <Button className="flex-1 sm:flex-none bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold rounded-lg shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all duration-300">
+                      <Button
+                        onClick={() => handleAddToCart(product.id)}
+                        className="flex-1 sm:flex-none bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold rounded-lg shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all duration-300"
+                        aria-label="Add to cart"
+                      >
                         <ShoppingBag className="h-4 w-4 mr-2" />
                         <span className="hidden sm:inline">Add</span>
                       </Button>

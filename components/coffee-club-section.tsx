@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Crown, Shield, Sword, Coffee, Scissors, Gift, Calendar, Percent, Star } from "lucide-react"
@@ -12,10 +14,10 @@ const membershipTiers = [
     features: [
       { icon: Coffee, text: "1 bag of premium coffee each month (Light or Dark)" },
       { icon: Gift, text: "Monthly sticker or mystery item (pins, patches)" },
-      { icon: Crown, text: "Access to physical Coffee Club bar & lounge in NYC" },
+      { icon: Crown, text: "Access to physical Coffee Club bar and lounge in upstate NY" },
       { icon: Percent, text: "Member pricing on coffee drinks at the bar" },
-      { icon: Scissors, text: "5-10% off at Bad Empire Barber Parlor" },
-      { icon: Star, text: "5% discount on merch & online shop" },
+      { icon: Scissors, text: "5 10% off at Bad Empire Barber Parlor" },
+      { icon: Star, text: "5% discount on merch and online shop" },
       { icon: Calendar, text: "Early access to select events and drops" },
     ],
     buttonText: "Pledge to Empire Entry",
@@ -28,13 +30,13 @@ const membershipTiers = [
     tagline: "High council of the night watch.",
     icon: Crown,
     features: [
-      { icon: Coffee, text: "2 bags of premium coffee each month (mix & match)" },
-      { icon: Gift, text: "Monthly apparel item (t-shirt, hat, or similar)" },
-      { icon: Crown, text: "Priority seating & exclusive hours at the lounge" },
-      { icon: Scissors, text: "Deep barber discounts & priority booking" },
+      { icon: Coffee, text: "2 bags of premium coffee each month (mix and match)" },
+      { icon: Gift, text: "Monthly apparel item (t shirt, hat, or similar)" },
+      { icon: Crown, text: "Priority seating and exclusive hours at the lounge" },
+      { icon: Scissors, text: "Deep barber discounts and priority booking" },
       { icon: Percent, text: "15% discount on all products" },
-      { icon: Star, text: "First access to limited drops & collabs" },
-      { icon: Calendar, text: "VIP invites to closed-door events" },
+      { icon: Star, text: "First access to limited drops and collabs" },
+      { icon: Calendar, text: "VIP invites to closed door events" },
     ],
     buttonText: "Ascend to Empire Elite",
     featured: true,
@@ -44,10 +46,14 @@ const membershipTiers = [
 const steps = [
   { step: "01", title: "Choose Your Tier", description: "Select Empire Entry or Empire Elite membership" },
   { step: "02", title: "Pick Your Roast", description: "Light, Dark, or mix both for Elite members" },
-  { step: "03", title: "Receive & Enjoy", description: "Bags ship monthly; perks unlock at the club" },
+  { step: "03", title: "Receive and Enjoy", description: "Bags ship monthly; perks unlock at the club" },
 ]
 
 export function CoffeeClubSection() {
+  const handleSubscribe = (tierName: string) => {
+    console.log("[v0] Subscribing to:", tierName)
+  }
+
   return (
     <section id="coffee-club" className="relative py-16 md:py-24 overflow-hidden px-4">
       {/* Medieval texture overlay */}
@@ -128,6 +134,7 @@ export function CoffeeClubSection() {
                   ))}
                 </ul>
                 <Button
+                  onClick={() => handleSubscribe(tier.name)}
                   className={`w-full font-bold py-5 md:py-6 text-sm md:text-lg rounded-xl transition-all duration-300 hover:scale-105 ${
                     tier.featured
                       ? "bg-gradient-to-r from-neon-gold to-amber-500 hover:from-neon-gold/90 hover:to-amber-500/90 text-background hover:text-background shadow-[0_0_30px_rgba(212,175,55,0.5)]"

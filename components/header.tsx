@@ -16,6 +16,11 @@ const navItems = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
+
+  const handleCartClick = () => {
+    console.log("[v0] Cart clicked, total items:", cartCount)
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-neon-pink/20">
@@ -51,10 +56,12 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="relative text-foreground hover:text-neon-cyan h-10 w-10 md:h-11 md:w-11"
+              onClick={handleCartClick}
+              aria-label="Shopping cart"
             >
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-neon-pink text-background text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                0
+                {cartCount}
               </span>
             </Button>
 
@@ -63,6 +70,7 @@ export function Header() {
               size="icon"
               className="md:hidden text-foreground h-10 w-10"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>

@@ -18,15 +18,22 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
+    console.log("[v0] Form submitted:", formData)
+    if (formData.name && formData.email && formData.message) {
+      setFormData({ name: "", email: "", message: "" })
+    }
+  }
+
+  const handleSocialLink = (platform: string) => {
+    console.log(`[v0] Opening ${platform}`)
   }
 
   return (
-    <section id="contact" className="relative py-24 overflow-hidden">
+    <section id="contact" className="relative py-24 overflow-hidden px-4">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-cyan/5 to-background" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 mb-6">
@@ -57,6 +64,7 @@ export function ContactSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="bg-background/50 border-foreground/20 focus:border-neon-pink text-foreground"
+                    required
                   />
                 </div>
                 <div>
@@ -70,6 +78,7 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="bg-background/50 border-foreground/20 focus:border-neon-pink text-foreground"
+                    required
                   />
                 </div>
                 <div>
@@ -83,6 +92,7 @@ export function ContactSection() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="bg-background/50 border-foreground/20 focus:border-neon-pink text-foreground resize-none"
+                    required
                   />
                 </div>
                 <Button
@@ -109,9 +119,9 @@ export function ContactSection() {
                     <p className="text-foreground/60">
                       Bad Empire Coffee Club
                       <br />
-                      Albany / Troy / Watervliet, NY
+                      Albany, Troy, Watervliet NY
                       <br />
-                      <span className="text-sm italic">Serving the Capital Region</span>
+                      <span className="text-sm italic">Serving the Capital Region of upstate NY</span>
                     </p>
                   </div>
                 </div>
@@ -142,20 +152,20 @@ export function ContactSection() {
               <CardContent className="p-6">
                 <h4 className="font-bold text-foreground mb-4">Follow the Empire</h4>
                 <div className="flex gap-4">
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => handleSocialLink("Instagram")}
                     className="p-3 rounded-lg bg-neon-pink/10 hover:bg-neon-pink/20 transition-colors group"
                     aria-label="Follow us on Instagram"
                   >
                     <Instagram className="h-6 w-6 text-neon-pink group-hover:scale-110 transition-transform" />
-                  </a>
-                  <a
-                    href="#"
+                  </button>
+                  <button
+                    onClick={() => handleSocialLink("Facebook")}
                     className="p-3 rounded-lg bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-colors group"
                     aria-label="Follow us on Facebook"
                   >
                     <Facebook className="h-6 w-6 text-neon-cyan group-hover:scale-110 transition-transform" />
-                  </a>
+                  </button>
                 </div>
               </CardContent>
             </Card>
