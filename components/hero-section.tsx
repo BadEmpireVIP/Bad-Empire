@@ -238,7 +238,7 @@ export function HeroSection() {
 
         <button
           onClick={prevSlide}
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-neon-pink/20 hover:bg-neon-pink/40 border border-neon-pink/50 rounded-full p-3 transition-all hover:scale-110"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 hidden md:block bg-neon-pink/20 hover:bg-neon-pink/40 border border-neon-pink/50 rounded-full p-3 transition-all hover:scale-110"
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-6 w-6 text-neon-pink" />
@@ -246,7 +246,7 @@ export function HeroSection() {
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-neon-cyan/20 hover:bg-neon-cyan/40 border border-neon-cyan/50 rounded-full p-3 transition-all hover:scale-110"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 hidden md:block bg-neon-cyan/20 hover:bg-neon-cyan/40 border border-neon-cyan/50 rounded-full p-3 transition-all hover:scale-110"
           aria-label="Next slide"
         >
           <ChevronRight className="h-6 w-6 text-neon-cyan" />
