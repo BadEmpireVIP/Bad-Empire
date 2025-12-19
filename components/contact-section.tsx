@@ -18,7 +18,6 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
     console.log("Form submitted:", formData)
   }
 
@@ -39,7 +38,7 @@ export function ContactSection() {
             <span className="bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent">Empire</span>
           </h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-            Questions, feedback, or want to visit? We're here for you.
+            Questions, feedback, or want to visit? We are here for you.
           </p>
         </div>
 
@@ -106,13 +105,13 @@ export function ContactSection() {
                     <MapPin className="h-6 w-6 text-neon-cyan" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-foreground mb-1">NYC Flagship Location</h4>
+                    <h4 className="font-bold text-foreground mb-1">Capital Region Location</h4>
                     <p className="text-foreground/60">
                       Bad Empire Coffee Club
                       <br />
-                      New York, NY
+                      Albany / Troy / Watervliet, NY
                       <br />
-                      <span className="text-sm italic">(Full address coming soon)</span>
+                      <span className="text-sm italic">Serving the Capital Region</span>
                     </p>
                   </div>
                 </div>
@@ -128,9 +127,9 @@ export function ContactSection() {
                   <div>
                     <h4 className="font-bold text-foreground mb-1">Hours of Operation</h4>
                     <p className="text-foreground/60">
-                      Monday - Friday: 7am - 10pm
+                      Monday through Friday: 7am to 10pm
                       <br />
-                      Saturday - Sunday: 8am - 12am
+                      Saturday and Sunday: 8am to 12am
                       <br />
                       <span className="text-neon-gold text-sm">Member hours may vary</span>
                     </p>
@@ -143,10 +142,18 @@ export function ContactSection() {
               <CardContent className="p-6">
                 <h4 className="font-bold text-foreground mb-4">Follow the Empire</h4>
                 <div className="flex gap-4">
-                  <a href="#" className="p-3 rounded-lg bg-neon-pink/10 hover:bg-neon-pink/20 transition-colors group">
+                  <a
+                    href="#"
+                    className="p-3 rounded-lg bg-neon-pink/10 hover:bg-neon-pink/20 transition-colors group"
+                    aria-label="Follow us on Instagram"
+                  >
                     <Instagram className="h-6 w-6 text-neon-pink group-hover:scale-110 transition-transform" />
                   </a>
-                  <a href="#" className="p-3 rounded-lg bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-colors group">
+                  <a
+                    href="#"
+                    className="p-3 rounded-lg bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-colors group"
+                    aria-label="Follow us on Facebook"
+                  >
                     <Facebook className="h-6 w-6 text-neon-cyan group-hover:scale-110 transition-transform" />
                   </a>
                 </div>

@@ -6,12 +6,13 @@ const features = [
   {
     icon: Coffee,
     title: "Coffee Bar & Lounge",
-    description: "A physical hub for members in NYC—craft brews, late-night vibes, and medieval tavern atmosphere.",
+    description:
+      "A physical hub for members in Upstate NY featuring craft brews, late night vibes, and medieval tavern atmosphere.",
   },
   {
     icon: Scissors,
     title: "Barber Parlor",
-    description: "Connected grooming experience with cuts, shaves, and member-exclusive rituals.",
+    description: "Connected grooming experience with cuts, shaves, and member exclusive rituals.",
   },
   {
     icon: Users,
@@ -48,9 +49,9 @@ export function AboutSection() {
             </h2>
 
             <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
-              Bad Empire Coffee Club is a lifestyle destination rooted in New York City. We blend the neon energy of
-              Miami Vice streets with the timeless mystique of medieval taverns—creating a space where coffee culture
-              meets community, gaming, and grooming.
+              Bad Empire Coffee Club is a lifestyle destination born in New York. We blend neon energy with the timeless
+              mystique of medieval taverns, creating a space where coffee culture meets community, gaming, grooming,
+              French Bulldog breeding, and custom jewelry.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">

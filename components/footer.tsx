@@ -51,7 +51,8 @@ export function Footer() {
               className="mb-4 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
             />
             <p className="text-foreground/60 text-sm leading-relaxed">
-              NYC lifestyle club blending neon energy with medieval mystique. Coffee, community, and culture.
+              New York lifestyle club blending neon energy with medieval mystique. Coffee, community, culture, French
+              Bulldogs, and more.
             </p>
           </div>
 
@@ -104,10 +105,18 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="flex gap-3 mt-6">
-              <a href="#" className="p-2 rounded-lg bg-neon-pink/10 hover:bg-neon-pink/20 transition-colors">
+              <a
+                href="#"
+                className="p-2 rounded-lg bg-neon-pink/10 hover:bg-neon-pink/20 transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram className="h-5 w-5 text-neon-pink" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-colors">
+              <a
+                href="#"
+                className="p-2 rounded-lg bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook className="h-5 w-5 text-neon-cyan" />
               </a>
             </div>
@@ -119,7 +128,7 @@ export function Footer() {
           <p className="text-foreground/40 text-sm">
             © {new Date().getFullYear()} Bad Empire Coffee Club. All rights reserved.
           </p>
-          <p className="text-foreground/40 text-sm">Made with ☕ in NYC</p>
+          <p className="text-foreground/40 text-sm">Born in New York</p>
         </div>
       </div>
     </footer>
