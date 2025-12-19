@@ -47,7 +47,7 @@ const slides = [
   },
 ]
 
-function Sparkles({ active }) {
+function Sparkles({ active, position = "center" }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -57,28 +57,29 @@ function Sparkles({ active }) {
       const sparkle = document.createElement("div")
       sparkle.className = "sparkle"
 
-      // Random position around a circle
+      // Random position around a circle with more variation
       const angle = Math.random() * Math.PI * 2
-      const radius = 120 + Math.random() * 80
+      const radius = 150 + Math.random() * 100
       const tx = Math.cos(angle) * radius
       const ty = Math.sin(angle) * radius
 
       sparkle.style.setProperty("--tx", `${tx}px`)
       sparkle.style.setProperty("--ty", `${ty}px`)
 
-      const randomDelay = Math.random() * 0.5
+      const randomDelay = Math.random() * 0.3
       sparkle.style.animationDelay = `${randomDelay}s`
 
       containerRef.current?.appendChild(sparkle)
 
-      setTimeout(() => sparkle.remove(), 2000)
+      setTimeout(() => sparkle.remove(), 1500)
     }
 
-    const interval = setInterval(createSparkle, 300)
+    // Create more frequent sparkles (every 200ms instead of 300ms)
+    const interval = setInterval(createSparkle, 200)
     return () => clearInterval(interval)
   }, [active])
 
-  return <div ref={containerRef} className="absolute inset-0 w-full h-full" />
+  return <div ref={containerRef} className={`absolute w-full h-full pointer-events-none ${position}`} />
 }
 
 export function HeroSection() {
@@ -181,14 +182,34 @@ export function HeroSection() {
 
                 {/* Right Content - Images with Sparkles */}
                 <div className="relative h-full hidden md:flex items-center justify-center">
-                  <div className="relative">
-                    {index === 3 && <Sparkles active={index === currentSlide} />}
+                  {index === 3 ? (
+                    <div className="relative">
+                      {/* Sparkle groups at 4 different positions */}
+                      <div className="absolute top-0 left-0 w-64 h-64">
+                        <Sparkles active={index === currentSlide} position="absolute top-0 left-0" />
+                      </div>
+                      <div className="absolute top-0 right-0 w-64 h-64">
+                        <Sparkles active={index === currentSlide} position="absolute top-0 right-0" />
+                      </div>
+                      <div className="absolute bottom-0 left-0 w-64 h-64">
+                        <Sparkles active={index === currentSlide} position="absolute bottom-0 left-0" />
+                      </div>
+                      <div className="absolute bottom-0 right-0 w-64 h-64">
+                        <Sparkles active={index === currentSlide} position="absolute bottom-0 right-0" />
+                      </div>
+                      <img
+                        src={s.image || "/placeholder.svg"}
+                        alt={s.title}
+                        className="max-w-md lg:max-w-lg drop-shadow-2xl relative z-10"
+                      />
+                    </div>
+                  ) : (
                     <img
                       src={s.image || "/placeholder.svg"}
                       alt={s.title}
-                      className="max-w-md lg:max-w-lg drop-shadow-2xl"
+                      className="max-w-md lg:max-w-lg drop-shadow-2xl coffee-glow"
                     />
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
