@@ -187,12 +187,16 @@
   animation: slide-fade 0.5s ease-in-out;
 }
 
-@keyframes sparkle {
+/* completely redesigned sparkle animation - no visible center dot, just subtle particles */
+@keyframes sparkle-subtle {
   0% {
     opacity: 0;
     transform: translate(0, 0) scale(0);
   }
-  50% {
+  20% {
+    opacity: 1;
+  }
+  80% {
     opacity: 1;
   }
   100% {
@@ -203,12 +207,13 @@
 
 .sparkle {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
   background: radial-gradient(circle, #00ffff 0%, #0099ff 100%);
   border-radius: 50%;
   pointer-events: none;
-  animation: sparkle 1.5s ease-out forwards;
+  animation: sparkle-subtle 1.2s ease-out forwards;
+  box-shadow: none;
 }
 
 /* added glow animation for coffee bags */
