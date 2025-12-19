@@ -49,6 +49,7 @@ const slides = [
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const videoRef = useRef(null)
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
@@ -61,21 +62,39 @@ export function HeroSection() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
+        setIsTransitioning(false)
+      }, 600)
     }, 8000)
     return () => clearInterval(timer)
   }, [])
 
   const goToSlide = (index) => {
-    setCurrentSlide(index)
+    if (index !== currentSlide) {
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentSlide(index)
+        setIsTransitioning(false)
+      }, 600)
+    }
   }
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setIsTransitioning(false)
+    }, 600)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+      setIsTransitioning(false)
+    }, 600)
   }
 
   const handleTouchStart = (e) => {
@@ -112,7 +131,7 @@ export function HeroSection() {
           key={s.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+          } ${isTransitioning && index === currentSlide ? "slide-transitioning" : ""}`}
           style={{
             backgroundImage: s.background,
             backgroundSize: "cover",

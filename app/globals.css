@@ -168,23 +168,22 @@
   backdrop-filter: blur(6px);
 }
 
-@keyframes slide-fade {
+/* Updated slide transition to fade-to-black */
+@keyframes fade-to-black {
   0% {
     opacity: 1;
-    transform: translateX(0);
   }
   50% {
     opacity: 0;
-    transform: translateX(-100px);
+    background-color: rgba(0, 0, 0, 1);
   }
   100% {
-    opacity: 0;
-    transform: translateX(-100px);
+    opacity: 1;
   }
 }
 
-.animate-slide-fade {
-  animation: slide-fade 0.5s ease-in-out;
+.slide-transitioning {
+  animation: fade-to-black 1.2s ease-in-out;
 }
 
 /* completely redesigned sparkle animation - no visible center dot, just subtle particles */
