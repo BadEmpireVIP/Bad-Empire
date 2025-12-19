@@ -2,21 +2,73 @@
 
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Crown, Coffee, ShoppingCart, Star, Check } from "lucide-react"
-import { useState } from "react"
+import { ChevronLeft, ChevronRight, Coffee, Crown, ShoppingCart } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export function HeroSection() {
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [cartItems, setCartItems] = useState(0)
+
+  const slides = [
+    {
+      id: "coffee",
+      title: "Empire Brews",
+      subtitle: "Legendary Coffee for the Bold",
+      content: "Discover our exclusive light and dark roasts crafted for the Bad Empire Coffee Club.",
+      image: "/images/manholdingcoffeeanddog.jpg",
+      cta1: { text: "Shop Coffee", action: () => addToCart("Light Roast") },
+      cta2: { text: "Join Club", action: () => console.log("[v0] Join club clicked") },
+    },
+    {
+      id: "chains",
+      title: "Chain Lifestyle",
+      subtitle: "Bling & Brotherhood",
+      content: "Premium gold, silver, and scrap metal jewelry for the empire. Chains that tell your story.",
+      video: "/videos/chain1.mp4",
+      cta1: { text: "Browse Chains", action: () => console.log("[v0] Browse chains clicked") },
+      cta2: { text: "Custom Orders", action: () => console.log("[v0] Custom orders clicked") },
+    },
+    {
+      id: "social",
+      title: "Bad Empire Club",
+      subtitle: "French Bulldog Community & Social",
+      content: "Join our community of coffee lovers, frenchie enthusiasts, dart players, and friends in NY.",
+      image: "/images/frenchbulldog1tp.jpg",
+      cta1: { text: "Membership Plans", action: () => console.log("[v0] Membership clicked") },
+      cta2: { text: "Learn More", action: () => console.log("[v0] Learn more clicked") },
+    },
+  ]
 
   const addToCart = (product: string) => {
     setCartItems((prev) => prev + 1)
     console.log(`[v0] Added ${product} to cart`)
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [slides.length])
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index)
+  }
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+  }
+
+  const slide = slides[currentSlide]
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20 px-4"
+      className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
       style={{
         backgroundImage: "url('/images/badempirebg1.jpg')",
         backgroundSize: "cover",
@@ -24,146 +76,112 @@ export function HeroSection() {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
-      {/* Neon Grid Effect - toned down */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(236,72,153,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(236,72,153,0.1)_1px,transparent_1px)] bg-[size:50px_50px] md:bg-[size:100px_100px]" />
+      {/* Neon Grid Effect */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(236,72,153,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(236,72,153,0.1)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
-      <div className="container mx-auto relative z-10">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Header Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-6 md:mb-8">
-            <Crown className="h-4 w-4 md:h-5 md:w-5 text-neon-gold" />
-            <span className="text-xs md:text-sm text-neon-gold font-medium">NY Coffee Club Lifestyle</span>
-          </div>
+      {/* Carousel Container */}
+      <div className="relative w-full h-full z-10 flex items-center justify-center">
+        {/* Slides */}
+        <div className="w-full h-full flex items-center justify-center px-4 md:px-8">
+          <div className="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+            {/* Left Content */}
+            <div className="flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-6">
+                <Crown className="h-4 w-4 text-neon-gold" />
+                <span className="text-sm text-neon-gold font-medium">
+                  Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
+                </span>
+              </div>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-            <span className="text-foreground">Bad Empire</span>
-            <br />
-            <span className="bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan bg-clip-text text-transparent">
-              Coffee Club
-            </span>
-          </h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 text-foreground">{slide.title}</h1>
 
-          {/* Tagline */}
-          <p className="text-base md:text-xl text-foreground/70 mb-8 md:mb-12 max-w-2xl leading-relaxed">
-            Neon streets, ancient legends, and midnight brews. Swear fealty to the brew and join the Empire.
-          </p>
+              <p className="text-lg md:text-xl text-neon-cyan mb-3 font-semibold">{slide.subtitle}</p>
 
-          {/* Product Cards - Centered */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full mb-8 md:mb-12">
-            {/* Light Roast Card */}
-            <div className="bg-card/40 backdrop-blur border border-neon-gold/30 rounded-2xl p-6 md:p-8 hover:border-neon-gold/60 transition-all duration-300 hover:bg-card/60 group">
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative h-40 md:h-48 w-32 md:w-40">
+              <p className="text-base md:text-lg text-foreground/70 mb-8 leading-relaxed max-w-xl">{slide.content}</p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  onClick={slide.cta1.action}
+                  className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-8 py-6 text-base rounded-lg hover:scale-105 transition-transform"
+                >
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  {slide.cta1.text}
+                </Button>
+                <Button
+                  onClick={slide.cta2.action}
+                  variant="outline"
+                  className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-8 py-6 text-base rounded-lg hover:scale-105 transition-transform bg-transparent"
+                >
+                  <Coffee className="mr-2 h-5 w-5" />
+                  {slide.cta2.text}
+                </Button>
+              </div>
+
+              {/* Cart Counter */}
+              <div className="mt-8 text-sm text-neon-gold font-semibold">Cart Items: {cartItems}</div>
+            </div>
+
+            {/* Right Image/Video */}
+            <div className="flex-1 flex items-center justify-center">
+              {slide.image && (
+                <div className="relative w-full h-96 md:h-full max-h-96">
                   <Image
-                    src="/images/badempirelightroast-transparent.png"
-                    alt="Sunblade of the East"
+                    src={slide.image || "/placeholder.svg"}
+                    alt={slide.title}
                     fill
                     className="object-contain"
+                    priority
                   />
                 </div>
-                <div className="text-center">
-                  <h3 className="text-lg md:text-xl font-bold text-neon-gold mb-1">Sunblade of the East</h3>
-                  <p className="text-sm text-foreground/60 mb-3">Light Roast</p>
-                  <div className="flex items-center justify-center gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-neon-gold text-neon-gold" />
-                    ))}
-                  </div>
-                  <p className="text-2xl font-bold text-neon-cyan mb-4">$14.99</p>
-                  <Button
-                    onClick={() => addToCart("Sunblade of the East")}
-                    className="w-full bg-gradient-to-r from-neon-gold to-neon-purple hover:from-neon-gold/90 hover:to-neon-purple/90 text-background font-bold rounded-lg hover:scale-105 transition-transform"
-                  >
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    Add to Cart
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Dark Roast Card */}
-            <div className="bg-card/40 backdrop-blur border border-neon-cyan/30 rounded-2xl p-6 md:p-8 hover:border-neon-cyan/60 transition-all duration-300 hover:bg-card/60 group">
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative h-40 md:h-48 w-32 md:w-40">
-                  <Image
-                    src="/images/badempiredarkroast1-transparent.png"
-                    alt="Nightfall of the Obsidian Crown"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="text-center">
-                  <h3 className="text-lg md:text-xl font-bold text-neon-cyan mb-1">Nightfall of the Obsidian Crown</h3>
-                  <p className="text-sm text-foreground/60 mb-3">Dark Roast</p>
-                  <div className="flex items-center justify-center gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-neon-cyan text-neon-cyan" />
-                    ))}
-                  </div>
-                  <p className="text-2xl font-bold text-neon-pink mb-4">$14.99</p>
-                  <Button
-                    onClick={() => addToCart("Nightfall of the Obsidian Crown")}
-                    className="w-full bg-gradient-to-r from-neon-cyan to-neon-pink hover:from-neon-cyan/90 hover:to-neon-pink/90 text-background font-bold rounded-lg hover:scale-105 transition-transform"
-                  >
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    Add to Cart
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="bg-gradient-to-r from-neon-pink/20 to-neon-cyan/20 backdrop-blur border border-neon-pink/30 rounded-2xl p-6 md:p-8 w-full mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Check className="h-6 w-6 text-neon-gold" />
-              <h3 className="text-xl md:text-2xl font-bold">Cart Items: {cartItems}</h3>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-8 py-6 rounded-xl hover:scale-105 transition-all"
-              >
-                <Coffee className="mr-2 h-5 w-5" />
-                Continue Shopping
-              </Button>
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-neon-cyan to-neon-gold hover:from-neon-cyan/90 hover:to-neon-gold/90 text-background font-bold px-8 py-6 rounded-xl hover:scale-105 transition-all"
-              >
-                Checkout Now
-              </Button>
-            </div>
-          </div>
-
-          {/* Trust Badges */}
-          <div className="grid grid-cols-3 gap-4 text-center text-sm md:text-base">
-            <div className="text-foreground/70">
-              <p className="font-bold text-neon-gold mb-1">100+</p>
-              <p>Club Members</p>
-            </div>
-            <div className="text-foreground/70 border-l border-r border-neon-pink/30">
-              <p className="font-bold text-neon-cyan mb-1">5.0</p>
-              <p>Star Rated</p>
-            </div>
-            <div className="text-foreground/70">
-              <p className="font-bold text-neon-purple mb-1">Fresh</p>
-              <p>Daily Roasted</p>
+              )}
+              {slide.video && (
+                <video
+                  key={slide.id}
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full max-w-md h-auto rounded-xl border border-neon-cyan/30"
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
+              )}
             </div>
           </div>
         </div>
+
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-neon-pink/20 hover:bg-neon-pink/40 border border-neon-pink/50 rounded-full p-3 transition-all hover:scale-110"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-6 w-6 text-neon-pink" />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-neon-cyan/20 hover:bg-neon-cyan/40 border border-neon-cyan/50 rounded-full p-3 transition-all hover:scale-110"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-6 w-6 text-neon-cyan" />
+        </button>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-neon-pink/50 flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-neon-pink rounded-full animate-pulse" />
-        </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`transition-all rounded-full ${
+              index === currentSlide ? "bg-neon-pink h-3 w-8" : "bg-neon-pink/30 hover:bg-neon-pink/50 h-3 w-3"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
     </section>
   )
