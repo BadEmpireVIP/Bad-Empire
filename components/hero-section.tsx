@@ -3,11 +3,13 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Coffee, Crown, ShoppingCart } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [cartItems, setCartItems] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const slides = [
     {
@@ -15,68 +17,104 @@ export function HeroSection() {
       title: "Empire Brews",
       subtitle: "Legendary Coffee for the Bold",
       content: "Discover our exclusive light and dark roasts crafted for the Bad Empire Coffee Club.",
-      image: "/images/manholdingcoffeeanddog.jpg",
+      images: ["/images/badempirelightroast-transparent.png", "/images/badempiredarkroast1-transparent.png"],
       cta1: { text: "Shop Coffee", action: () => addToCart("Light Roast") },
-      cta2: { text: "Join Club", action: () => console.log("[v0] Join club clicked") },
+      cta2: { text: "Join Club", action: () => handleCTA("Join club clicked") },
     },
     {
       id: "chains",
       title: "Chain Lifestyle",
-      subtitle: "Bling & Brotherhood",
+      subtitle: "Bling and Brotherhood",
       content: "Premium gold, silver, and scrap metal jewelry for the empire. Chains that tell your story.",
       video: "/videos/chain1.mp4",
-      cta1: { text: "Browse Chains", action: () => console.log("[v0] Browse chains clicked") },
-      cta2: { text: "Custom Orders", action: () => console.log("[v0] Custom orders clicked") },
+      cta1: { text: "Browse Chains", action: () => handleCTA("Browse chains clicked") },
+      cta2: { text: "Custom Orders", action: () => handleCTA("Custom orders clicked") },
     },
     {
       id: "social",
       title: "Bad Empire Club",
-      subtitle: "French Bulldog Community & Social",
+      subtitle: "French Bulldog Community and Social",
       content: "Join our community of coffee lovers, frenchie enthusiasts, dart players, and friends in NY.",
-      image: "/images/frenchbulldog1tp.jpg",
-      cta1: { text: "Membership Plans", action: () => console.log("[v0] Membership clicked") },
-      cta2: { text: "Learn More", action: () => console.log("[v0] Learn more clicked") },
+      image: "/images/frenchbulldog1tp.png",
+      cta1: { text: "Membership Plans", action: () => handleCTA("Membership clicked") },
+      cta2: { text: "Learn More", action: () => handleCTA("Learn more clicked") },
     },
   ]
 
+  const handleCTA = (action: string) => {
+    console.log(`[v0] Button clicked: ${action}`)
+  }
+
   const addToCart = (product: string) => {
     setCartItems((prev) => prev + 1)
-    console.log(`[v0] Added ${product} to cart`)
+    console.log(`[v0] Added ${product} to cart. Total items: ${cartItems + 1}`)
   }
 
   useEffect(() => {
+    if (currentSlide === 1 && videoRef.current) {
+      videoRef.current.play().catch((err) => console.log("[v0] Video play error:", err))
+    }
+  }, [currentSlide])
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000)
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
+        setIsTransitioning(false)
+      }, 500)
+    }, 10000)
     return () => clearInterval(interval)
   }, [slides.length])
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index)
+    console.log(`[v0] Navigating to slide ${index}`)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentSlide(index)
+      setIsTransitioning(false)
+    }, 500)
   }
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setIsTransitioning(false)
+    }, 500)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+      setIsTransitioning(false)
+    }, 500)
   }
 
   const slide = slides[currentSlide]
+
+  const backgroundMap: { [key: number]: string | null } = {
+    0: "url('/images/badempirebg2.jpg')",
+    1: "url('/images/badempirebg3.jpg')",
+    2: "url('/images/badempirebg1.jpg')",
+  }
 
   return (
     <section
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
       style={{
-        backgroundImage: "url('/images/badempirebg1.jpg')",
+        backgroundImage: backgroundMap[currentSlide],
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${isTransitioning ? "opacity-100" : "opacity-0"} bg-black`}
+      />
+      <div className="absolute inset-0 bg-black/15" />
 
       {/* Neon Grid Effect */}
       <div className="absolute inset-0 opacity-5">
@@ -86,70 +124,101 @@ export function HeroSection() {
       {/* Carousel Container */}
       <div className="relative w-full h-full z-10 flex items-center justify-center">
         {/* Slides */}
-        <div className="w-full h-full flex items-center justify-center px-4 md:px-8">
-          <div className="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-            {/* Left Content */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-6">
-                <Crown className="h-4 w-4 text-neon-gold" />
-                <span className="text-sm text-neon-gold font-medium">
-                  Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
-                </span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 text-foreground">{slide.title}</h1>
-
-              <p className="text-lg md:text-xl text-neon-cyan mb-3 font-semibold">{slide.subtitle}</p>
-
-              <p className="text-base md:text-lg text-foreground/70 mb-8 leading-relaxed max-w-xl">{slide.content}</p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  onClick={slide.cta1.action}
-                  className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-8 py-6 text-base rounded-lg hover:scale-105 transition-transform"
-                >
-                  <ShoppingCart className="mr-2 h-5 w-5" />
-                  {slide.cta1.text}
-                </Button>
-                <Button
-                  onClick={slide.cta2.action}
-                  variant="outline"
-                  className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-8 py-6 text-base rounded-lg hover:scale-105 transition-transform bg-transparent"
-                >
-                  <Coffee className="mr-2 h-5 w-5" />
-                  {slide.cta2.text}
-                </Button>
-              </div>
-
-              {/* Cart Counter */}
-              <div className="mt-8 text-sm text-neon-gold font-semibold">Cart Items: {cartItems}</div>
-            </div>
-
-            {/* Right Image/Video */}
-            <div className="flex-1 flex items-center justify-center">
-              {slide.image && (
-                <div className="relative w-full h-96 md:h-full max-h-96">
-                  <Image
-                    src={slide.image || "/placeholder.svg"}
-                    alt={slide.title}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
+        <div
+          className={`w-full h-full flex items-center justify-center px-4 md:px-8 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+        >
+          <div className="w-full max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="flex flex-col justify-center max-w-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4 w-fit text-xs">
+                  <Crown className="h-3 w-3 text-neon-gold" />
+                  <span className="text-neon-gold font-medium">
+                    Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
+                  </span>
                 </div>
-              )}
-              {slide.video && (
-                <video
-                  key={slide.id}
-                  autoPlay
-                  loop
-                  muted
-                  className="w-full max-w-md h-auto rounded-xl border border-neon-cyan/30"
+
+                <h1
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-foreground leading-tight drop-shadow-lg"
+                  style={{ fontFamily: "'Bradley Gratis', serif" }}
                 >
-                  <source src={slide.video} type="video/mp4" />
-                </video>
-              )}
+                  {slide.title}
+                </h1>
+
+                <p
+                  className="text-base md:text-lg text-neon-cyan mb-3 font-semibold drop-shadow-md"
+                  style={{ fontFamily: "'Bradley Gratis', serif" }}
+                >
+                  {slide.subtitle}
+                </p>
+
+                <p className="text-sm md:text-base text-foreground/80 mb-6 leading-relaxed">{slide.content}</p>
+
+                <div className="flex flex-col sm:flex-row gap-3 w-full">
+                  <Button
+                    onClick={slide.cta1.action}
+                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200"
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    {slide.cta1.text}
+                  </Button>
+                  <Button
+                    onClick={slide.cta2.action}
+                    variant="outline"
+                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent"
+                  >
+                    <Coffee className="mr-2 h-4 w-4" />
+                    {slide.cta2.text}
+                  </Button>
+                </div>
+
+                <div className="mt-4 text-xs text-neon-gold font-semibold">Cart Items: {cartItems}</div>
+              </div>
+
+              {/* Right Image/Video */}
+              <div className="flex items-center justify-center lg:justify-end">
+                {"images" in slide && slide.images && (
+                  <div className="flex gap-3 items-center justify-center">
+                    {slide.images.map((img, idx) => (
+                      <div key={idx} className="relative w-32 h-80 md:w-40 md:h-96">
+                        <Image
+                          src={img || "/placeholder.svg"}
+                          alt={`Coffee bag ${idx + 1}`}
+                          fill
+                          className="object-contain"
+                          priority
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {"video" in slide && slide.video && (
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    loop
+                    muted
+                    className={`w-full max-w-xs h-auto rounded-xl border border-neon-cyan/30 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+                    onTimeUpdate={(e) => {
+                      if (e.currentTarget.currentTime >= 15) {
+                        e.currentTarget.currentTime = 0.5
+                      }
+                    }}
+                  >
+                    <source src={slide.video} type="video/mp4" />
+                  </video>
+                )}
+                {"image" in slide && slide.image && (
+                  <div className="relative w-56 h-80 md:w-64 md:h-96">
+                    <Image
+                      src={slide.image || "/placeholder.svg"}
+                      alt={slide.title}
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

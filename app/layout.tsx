@@ -373,6 +373,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <style>{`
+          @font-face {
+            font-family: 'Bradley Gratis';
+            src: url('/Bradley Gratis.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+          }
+          h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bradley Gratis', serif;
+          }
+        `}</style>
+
         {/* Additional SEO meta tags */}
         <meta name="geo.region" content="US-NY" />
         <meta name="geo.placename" content="Albany" />
