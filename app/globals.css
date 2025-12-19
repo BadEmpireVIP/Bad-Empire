@@ -168,20 +168,18 @@
   backdrop-filter: blur(6px);
 }
 
-/* Replace fade-to-black with horizontal slide animation */
+/* updated slide animation to be a true overlay effect */
 @keyframes slide-left {
   0% {
-    opacity: 1;
     transform: translateX(100%);
   }
   100% {
-    opacity: 1;
     transform: translateX(0);
   }
 }
 
 .slide-transitioning {
-  animation: slide-left 0.6s ease-in-out;
+  animation: slide-left 0.6s ease-in-out forwards;
 }
 
 /* completely redesigned sparkle animation - no visible center dot, just subtle particles */

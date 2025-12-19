@@ -130,7 +130,7 @@ export function HeroSection() {
         <div
           key={s.id}
           className={`absolute inset-0 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+            index === currentSlide ? "z-10 opacity-100" : "z-0 opacity-0"
           } ${isTransitioning && index === currentSlide ? "slide-transitioning" : ""}`}
           style={{
             backgroundImage: s.background,
@@ -203,8 +203,8 @@ export function HeroSection() {
                       index === 0
                         ? "w-40 sm:w-56 md:w-64 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-40 sm:w-56 md:w-64 lg:w-80 image-float"
-                          : "w-48 sm:w-64 md:w-96 lg:w-full image-pulse"
+                          ? "w-40 sm:w-56 md:w-60 lg:w-72 image-float"
+                          : "w-48 sm:w-64 md:w-80 lg:w-96 image-pulse"
                     }`}
                   />
                 </div>
