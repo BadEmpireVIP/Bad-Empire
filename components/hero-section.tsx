@@ -126,7 +126,8 @@ export function HeroSection() {
       <div
         className={`absolute inset-0 transition-opacity duration-500 ${isTransitioning ? "opacity-100" : "opacity-0"} bg-black`}
       />
-      <div className="absolute inset-0 bg-black/15" />
+      {/* Increased overlay opacity from black/15 to black/40 to dim backgrounds more */}
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Neon Grid Effect */}
       <div className="absolute inset-0 opacity-5">
