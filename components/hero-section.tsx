@@ -146,11 +146,13 @@ export function HeroSection() {
                 </div>
 
                 {/* Right Content - Images with Animations */}
-                <div className="relative h-full hidden md:flex items-center justify-center">
+                <div
+                  className={`relative w-full flex items-center ${index === 0 ? "justify-end" : "justify-center"} md:justify-center md:h-full md:col-span-1 mt-6 md:mt-0`}
+                >
                   <img
                     src={s.image || "/placeholder.svg"}
                     alt={s.title}
-                    className={`max-w-md lg:max-w-lg drop-shadow-2xl ${
+                    className={`w-40 sm:w-56 md:max-w-md lg:max-w-lg drop-shadow-2xl ${
                       index === 0
                         ? "image-sway"
                         : index === 1
