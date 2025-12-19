@@ -43,7 +43,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-sm"
+                className="text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-xl"
                 style={{ fontFamily: "'Bradley Gratis', serif" }}
               >
                 {item.name}
@@ -85,7 +85,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-3 px-2 text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-sm"
+                className="block py-3 px-2 text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-xl"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
