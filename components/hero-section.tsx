@@ -51,6 +51,7 @@ export function HeroSection() {
                 <Coffee className="mr-2 h-5 w-5" />
                 Join the Club
               </Button>
+              {/* New Button */}
               <Button
                 size="lg"
                 variant="outline"
