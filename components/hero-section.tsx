@@ -233,7 +233,7 @@ export function HeroSection() {
                   </video>
                 )}
                 {"image" in slide && slide.image && (
-                  <div className="relative w-64 h-96 md:w-72 md:h-[500px] lg:w-80 lg:h-[550px]">
+                  <div className="relative -ml-20 lg:-ml-32 w-48 h-72 md:w-56 md:h-80 lg:w-64 lg:h-96">
                     <Image
                       src={slide.image || "/placeholder.svg"}
                       alt={slide.title}
