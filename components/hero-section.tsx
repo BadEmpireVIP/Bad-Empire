@@ -54,9 +54,9 @@ export function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const titleSizeClass = "text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
-  const subtitleSizeClass = "text-lg sm:text-xl md:text-3xl lg:text-4xl"
-  const descriptionSizeClass = "text-base sm:text-lg md:text-xl lg:text-2xl"
+  const titleSizeClass = "text-4xl sm:text-5xl md:text-5xl lg:text-8xl"
+  const subtitleSizeClass = "text-lg sm:text-xl md:text-2xl lg:text-4xl"
+  const descriptionSizeClass = "text-base sm:text-lg md:text-base lg:text-2xl"
 
   const slide = slides[currentSlide]
 
@@ -121,7 +121,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full min-h-screen pt-16 md:pt-20 overflow-hidden bg-black"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -213,10 +213,10 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-40 sm:w-56 md:w-64 lg:w-80 image-sway"
+                        ? "w-40 sm:w-56 md:w-48 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-40 sm:w-56 md:w-60 lg:w-72 image-float"
-                          : "w-48 sm:w-64 md:w-80 lg:w-96 image-pulse"
+                          ? "w-40 sm:w-56 md:w-48 lg:w-72 image-float"
+                          : "w-48 sm:w-64 md:w-56 lg:w-96 image-pulse"
                     }`}
                   />
                 </div>
