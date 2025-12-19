@@ -376,7 +376,7 @@ export default function RootLayout({
         <style>{`
           @font-face {
             font-family: 'Bradley Gratis';
-            src: url('/Bradley Gratis.ttf') format('truetype');
+            src: url('/Bradley-Gratis.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
             font-display: swap;

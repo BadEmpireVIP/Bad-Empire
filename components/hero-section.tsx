@@ -127,8 +127,8 @@ export function HeroSection() {
         <div
           className={`w-full h-full flex items-center justify-center px-4 md:px-8 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
         >
-          <div className="w-full max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="w-full max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
               <div className="flex flex-col justify-center max-w-md">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4 w-fit text-xs">
                   <Crown className="h-3 w-3 text-neon-gold" />
@@ -138,14 +138,14 @@ export function HeroSection() {
                 </div>
 
                 <h1
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-foreground leading-tight drop-shadow-lg"
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3 text-foreground leading-tight drop-shadow-lg"
                   style={{ fontFamily: "'Bradley Gratis', serif" }}
                 >
                   {slide.title}
                 </h1>
 
                 <p
-                  className="text-base md:text-lg text-neon-cyan mb-3 font-semibold drop-shadow-md"
+                  className="text-lg md:text-xl text-neon-cyan mb-3 font-semibold drop-shadow-md"
                   style={{ fontFamily: "'Bradley Gratis', serif" }}
                 >
                   {slide.subtitle}
@@ -171,7 +171,7 @@ export function HeroSection() {
                   </Button>
                 </div>
 
-                <div className="mt-4 text-xs text-neon-gold font-semibold">Cart Items: {cartItems}</div>
+                <div className="mt-4 text-xs text-neon-gold font-semibold">{cartItems} in cart</div>
               </div>
 
               {/* Right Image/Video */}
