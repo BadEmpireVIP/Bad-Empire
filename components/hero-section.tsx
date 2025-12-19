@@ -50,6 +50,8 @@ const slides = [
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const videoRef = useRef(null)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
 
   const titleSizeClass = "text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
   const subtitleSizeClass = "text-lg sm:text-xl md:text-3xl lg:text-4xl"
@@ -76,8 +78,34 @@ export function HeroSection() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
   }
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].screenX
+  }
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].screenX
+    handleSwipe()
+  }
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50
+    const diff = touchStartX.current - touchEndX.current
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide()
+      } else {
+        prevSlide()
+      }
+    }
+  }
+
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black">
+    <section
+      className="relative w-full h-screen overflow-hidden bg-black"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Slides */}
       {slides.map((s, index) => (
         <div
@@ -154,10 +182,10 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-32 sm:w-48 md:w-56 lg:w-64 image-sway"
+                        ? "w-40 sm:w-56 md:w-64 lg:w-80 image-sway"
                         : index === 1 || index === 2
                           ? "w-40 sm:w-56 md:w-80 lg:w-96 image-float"
-                          : "w-40 sm:w-56 md:w-96 lg:w-full image-pulse"
+                          : "w-48 sm:w-64 md:w-full lg:w-full image-pulse"
                     }`}
                   />
                 </div>
