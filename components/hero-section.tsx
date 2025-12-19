@@ -88,7 +88,7 @@ export function HeroSection() {
           style={{
             backgroundImage: s.background,
             backgroundSize: "cover",
-            backgroundPosition: index === 1 ? "right" : index === currentSlide ? "right" : "center",
+            backgroundPosition: index === 0 ? "right" : "center",
           }}
         >
           {/* Overlay */}
