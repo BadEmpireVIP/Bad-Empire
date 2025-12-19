@@ -155,7 +155,10 @@ export function HeroSection() {
                   <div className="absolute -inset-8 bg-gradient-radial from-black/40 via-black/20 to-transparent rounded-3xl blur-3xl" />
                   <h1
                     className="relative text-6xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight drop-shadow-lg"
-                    style={{ fontFamily: "'Bradley Gratis', serif" }}
+                    style={{
+                      fontFamily: "'Bradley Gratis', serif",
+                      textShadow: "3px 3px 8px rgba(0, 0, 0, 0.95), 5px 5px 12px rgba(0, 0, 0, 0.8)",
+                    }}
                   >
                     {slide.title}
                   </h1>
@@ -165,7 +168,10 @@ export function HeroSection() {
                   <div className="absolute -inset-4 bg-gradient-radial from-black/30 via-black/10 to-transparent rounded-2xl blur-2xl" />
                   <p
                     className="relative text-xl md:text-2xl lg:text-3xl text-neon-cyan font-semibold drop-shadow-md"
-                    style={{ fontFamily: "'Bradley Gratis', serif" }}
+                    style={{
+                      fontFamily: "'Bradley Gratis', serif",
+                      textShadow: "2px 2px 6px rgba(0, 0, 0, 0.9), 4px 4px 10px rgba(0, 0, 0, 0.7)",
+                    }}
                   >
                     {slide.subtitle}
                   </p>
