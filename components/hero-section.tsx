@@ -141,20 +141,20 @@ export function HeroSection() {
           className={`w-full h-full flex items-center justify-center px-3 sm:px-4 md:px-8 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
         >
           <div className="w-full max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-6 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
               {/* Left Content */}
-              <div className="flex flex-col justify-center py-6 sm:py-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-3 sm:mb-6 w-fit text-xs">
+              <div className="flex flex-col justify-center py-8 sm:py-10 md:py-6 text-center md:text-left px-2 sm:px-0">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4 sm:mb-6 w-fit text-xs sm:text-sm mx-auto md:mx-0">
                   <Crown className="h-3 w-3 text-neon-gold" />
-                  <span className="text-neon-gold font-medium text-xs sm:text-sm">
+                  <span className="text-neon-gold font-medium">
                     Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
                   </span>
                 </div>
 
-                <div className="relative mb-3 sm:mb-4">
+                <div className="relative mb-4 sm:mb-6">
                   <div className="absolute -inset-4 sm:-inset-6 lg:-inset-8 bg-gradient-radial from-black/40 via-black/20 to-transparent rounded-3xl blur-3xl" />
                   <h1
-                    className="relative text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-tight drop-shadow-lg"
+                    className="relative text-4xl sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-tight drop-shadow-lg"
                     style={{
                       fontFamily: "'Bradley Gratis', serif",
                       textShadow: "3px 3px 8px rgba(0, 0, 0, 0.95), 5px 5px 12px rgba(0, 0, 0, 0.8)",
@@ -164,10 +164,10 @@ export function HeroSection() {
                   </h1>
                 </div>
 
-                <div className="relative mb-3 sm:mb-4">
+                <div className="relative mb-4 sm:mb-6">
                   <div className="absolute -inset-2 sm:-inset-3 lg:-inset-4 bg-gradient-radial from-black/30 via-black/10 to-transparent rounded-2xl blur-2xl" />
                   <p
-                    className="relative text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-neon-cyan font-semibold drop-shadow-md leading-tight"
+                    className="relative text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl text-neon-cyan font-semibold drop-shadow-md leading-tight"
                     style={{
                       fontFamily: "'Bradley Gratis', serif",
                       textShadow: "2px 2px 6px rgba(0, 0, 0, 0.9), 4px 4px 10px rgba(0, 0, 0, 0.7)",
@@ -177,37 +177,37 @@ export function HeroSection() {
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-foreground/80 mb-4 sm:mb-6 lg:mb-8 leading-relaxed max-w-lg">
+                <p className="text-sm sm:text-base md:text-base text-foreground/80 mb-6 sm:mb-8 md:mb-8 lg:mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
                   {slide.content}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 w-full">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-3 lg:gap-4 w-full md:w-auto">
                   <Button
                     onClick={slide.cta1.action}
-                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
+                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap w-full sm:w-auto"
                   >
-                    <ShoppingCart className="mr-1 sm:mr-2 h-4 w-4" />
+                    <ShoppingCart className="mr-2 h-4 w-4" />
                     {slide.cta1.text}
                   </Button>
                   <Button
                     onClick={slide.cta2.action}
                     variant="outline"
-                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent whitespace-nowrap"
+                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent whitespace-nowrap w-full sm:w-auto"
                   >
-                    <Coffee className="mr-1 sm:mr-2 h-4 w-4" />
+                    <Coffee className="mr-2 h-4 w-4" />
                     {slide.cta2.text}
                   </Button>
                 </div>
               </div>
 
               {/* Right Image/Video */}
-              <div className="flex items-center justify-center lg:justify-end h-auto lg:h-full py-4 sm:py-6">
+              <div className="flex items-center justify-center md:justify-end h-auto md:h-full py-6 sm:py-8">
                 {"images" in slide && slide.images && (
-                  <div className="flex gap-3 sm:gap-4 lg:gap-6 items-center justify-center">
+                  <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center">
                     {slide.images.map((img, idx) => (
                       <div
                         key={idx}
-                        className="relative w-28 h-64 sm:w-36 sm:h-80 md:w-40 md:h-96 lg:w-48 lg:h-[450px]"
+                        className="relative w-32 h-72 sm:w-40 sm:h-96 md:w-40 md:h-96 lg:w-48 lg:h-[450px]"
                       >
                         <Image
                           src={img || "/placeholder.svg"}
