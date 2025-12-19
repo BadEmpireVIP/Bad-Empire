@@ -54,9 +54,9 @@ export function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const titleSizeClass = "text-4xl sm:text-5xl md:text-3xl lg:text-8xl"
-  const subtitleSizeClass = "text-lg sm:text-xl md:text-lg lg:text-4xl"
-  const descriptionSizeClass = "text-base sm:text-lg md:text-sm lg:text-2xl"
+  const titleSizeClass = "text-3xl sm:text-4xl md:text-3xl lg:text-8xl"
+  const subtitleSizeClass = "text-base sm:text-lg md:text-lg lg:text-4xl"
+  const descriptionSizeClass = "text-sm sm:text-base md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
 
@@ -121,7 +121,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full min-h-screen pt-16 md:pt-32 lg:pt-20 overflow-hidden bg-black"
+      className="relative w-full min-h-screen pt-24 sm:pt-28 md:pt-32 lg:pt-20 overflow-hidden bg-black"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -142,13 +142,13 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-black/40" />
 
           {/* Content */}
-          <div className="relative w-full flex items-center justify-center py-8 md:py-12 lg:py-0 md:min-h-screen">
-            <div className="w-full px-4 sm:px-8 lg:px-16">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6 items-center max-w-6xl mx-auto">
+          <div className="relative w-full flex items-center justify-center py-6 sm:py-8 md:py-12 lg:py-0 md:min-h-screen">
+            <div className="w-full px-4 sm:px-6 lg:px-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-2 lg:gap-6 items-center max-w-6xl mx-auto">
                 {/* Left Content */}
                 <div className="text-center md:text-left flex flex-col justify-center">
                   <h1
-                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-1 sm:mb-3 md:mb-2 lg:mb-4 text-balance ${
+                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-2 sm:mb-4 md:mb-2 lg:mb-4 text-balance ${
                       index === currentSlide ? "animate-slide-in-title" : ""
                     }`}
                     style={{
@@ -158,7 +158,7 @@ export function HeroSection() {
                     {s.title}
                   </h1>
                   <h2
-                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-1 sm:mb-3 md:mb-2 lg:mb-4 text-balance ${
+                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-2 sm:mb-4 md:mb-2 lg:mb-4 text-balance ${
                       index === currentSlide ? "animate-slide-in-subtitle" : ""
                     }`}
                     style={{
@@ -168,7 +168,7 @@ export function HeroSection() {
                     {s.subtitle}
                   </h2>
                   <p
-                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-3 sm:mb-6 md:mb-3 lg:mb-8 text-balance ${
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-4 sm:mb-6 md:mb-3 lg:mb-8 text-balance ${
                       index === currentSlide ? "animate-slide-in-description" : ""
                     }`}
                     style={{
