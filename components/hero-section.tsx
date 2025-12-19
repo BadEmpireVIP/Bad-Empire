@@ -215,7 +215,7 @@ export function HeroSection() {
                       index === 0
                         ? "w-32 sm:w-48 md:w-40 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-32 sm:w-40 md:w-40 lg:w-72 image-float"
+                          ? "w-20 sm:w-28 md:w-24 lg:w-48 image-float"
                           : "w-40 sm:w-56 md:w-48 lg:w-96 image-pulse"
                     }`}
                   />
