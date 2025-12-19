@@ -10,7 +10,7 @@ const slides = [
     title: "Bad Empire Coffee Club",
     subtitle: "Join Our Exclusive Community",
     description: "Experience the finest specialty coffee with our membership",
-    image: "/images/socialsharing.png",
+    image: "/images/badempirecoffeeclub.png",
     cta1: { text: "Join Club", action: () => console.log("Join club clicked") },
     cta2: { text: "Learn More", action: () => console.log("Learn more clicked") },
     background: "url(/images/badempirebg1.jpg)",
@@ -20,7 +20,7 @@ const slides = [
     title: "Premium Dark Roast",
     subtitle: "Boldly Crafted",
     description: "Rich, full-bodied flavor with a smooth finish",
-    image: "/images/badempiредarkroast1-transparent.png",
+    image: "/images/badempiredarkroast1-transparent.png",
     cta1: { text: "Add to Cart", action: () => console.log("Dark roast added") },
     cta2: { text: "Details", action: () => console.log("Dark roast details") },
     background: "url(/images/badempirebg2.jpg)",
@@ -40,12 +40,46 @@ const slides = [
     title: "Chain Supply",
     subtitle: "Exceptional Quality",
     description: "Curated selection from the finest suppliers",
-    video: "/videos/chain1.mp4",
+    image: "/images/chaintest.png",
     cta1: { text: "Explore", action: () => console.log("Explore chain") },
     cta2: { text: "Contact", action: () => console.log("Contact sales") },
     background: "url(/images/badempirebg3.jpg)",
   },
 ]
+
+function Sparkles({ active }) {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!active || !containerRef.current) return
+
+    const createSparkle = () => {
+      const sparkle = document.createElement("div")
+      sparkle.className = "sparkle"
+
+      // Random position around a circle
+      const angle = Math.random() * Math.PI * 2
+      const radius = 120 + Math.random() * 80
+      const tx = Math.cos(angle) * radius
+      const ty = Math.sin(angle) * radius
+
+      sparkle.style.setProperty("--tx", `${tx}px`)
+      sparkle.style.setProperty("--ty", `${ty}px`)
+
+      const randomDelay = Math.random() * 0.5
+      sparkle.style.animationDelay = `${randomDelay}s`
+
+      containerRef.current?.appendChild(sparkle)
+
+      setTimeout(() => sparkle.remove(), 2000)
+    }
+
+    const interval = setInterval(createSparkle, 300)
+    return () => clearInterval(interval)
+  }, [active])
+
+  return <div ref={containerRef} className="absolute inset-0 w-full h-full" />
+}
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -63,14 +97,6 @@ export function HeroSection() {
     }, 8000)
     return () => clearInterval(timer)
   }, [])
-
-  useEffect(() => {
-    if (videoRef.current && currentSlide === 3) {
-      videoRef.current.play().catch(() => {
-        console.log("Video autoplay failed")
-      })
-    }
-  }, [currentSlide])
 
   const goToSlide = (index) => {
     setCurrentSlide(index)
@@ -153,25 +179,16 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Right Content - Images/Video */}
+                {/* Right Content - Images with Sparkles */}
                 <div className="relative h-full hidden md:flex items-center justify-center">
-                  {s.video ? (
-                    <video
-                      ref={videoRef}
-                      src={s.video}
-                      className="w-96 h-auto drop-shadow-2xl"
-                      autoPlay
-                      muted
-                      playsInline
-                      loop
-                    />
-                  ) : (
+                  <div className="relative">
+                    {index === 3 && <Sparkles active={index === currentSlide} />}
                     <img
                       src={s.image || "/placeholder.svg"}
                       alt={s.title}
                       className="max-w-md lg:max-w-lg drop-shadow-2xl"
                     />
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
