@@ -120,7 +120,7 @@ export function HeroSection() {
       style={{
         backgroundImage: backgroundMap[currentSlide],
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: currentSlide === 2 ? "right center" : "center",
         backgroundAttachment: "fixed",
       }}
     >
