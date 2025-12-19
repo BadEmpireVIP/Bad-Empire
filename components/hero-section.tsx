@@ -147,19 +147,17 @@ export function HeroSection() {
 
                 {/* Right Content - Images with Animations */}
                 <div
-                  className={`relative w-full flex items-center ${index === 0 ? "justify-end" : "justify-center"} md:justify-center md:h-full md:col-span-1 mt-6 md:mt-0`}
+                  className={`relative w-full flex items-center justify-center md:h-full md:col-span-1 mt-6 md:mt-0`}
                 >
                   <img
                     src={s.image || "/placeholder.svg"}
                     alt={s.title}
-                    className={`w-40 sm:w-56 md:max-w-md lg:max-w-lg drop-shadow-2xl ${
+                    className={`drop-shadow-2xl ${
                       index === 0
-                        ? "image-sway"
-                        : index === 1
-                          ? "image-float"
-                          : index === 2
-                            ? "image-tilt"
-                            : "image-pulse"
+                        ? "w-32 sm:w-48 md:w-56 lg:w-64 image-sway"
+                        : index === 1 || index === 2
+                          ? "w-40 sm:w-56 md:w-80 lg:w-96 image-float"
+                          : "w-40 sm:w-56 md:w-96 lg:w-full image-pulse"
                     }`}
                   />
                 </div>
