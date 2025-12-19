@@ -216,19 +216,59 @@
   box-shadow: none;
 }
 
-/* added glow animation for coffee bags */
-@keyframes radiant-glow {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 200, 0, 0.4), 0 0 40px rgba(255, 180, 0, 0.2);
+/* removed coffee-glow and sparkle animations, added subtle image animations */
+@keyframes gentle-sway {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 200, 0, 0.6), 0 0 60px rgba(255, 180, 0, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 200, 0, 0.4), 0 0 40px rgba(255, 180, 0, 0.2);
+    transform: translateX(8px) translateY(-4px);
   }
 }
 
-.coffee-glow {
-  animation: radiant-glow 2s ease-in-out infinite;
+@keyframes subtle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+}
+
+@keyframes gentle-tilt {
+  0%,
+  100% {
+    transform: rotateZ(-2deg);
+  }
+  50% {
+    transform: rotateZ(2deg);
+  }
+}
+
+@keyframes pulse-scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.image-sway {
+  animation: gentle-sway 4s ease-in-out infinite;
+}
+
+.image-float {
+  animation: subtle-float 3.5s ease-in-out infinite;
+}
+
+.image-tilt {
+  animation: gentle-tilt 4.5s ease-in-out infinite;
+}
+
+.image-pulse {
+  animation: pulse-scale 3s ease-in-out infinite;
 }

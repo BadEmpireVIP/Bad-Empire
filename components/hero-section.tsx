@@ -47,39 +47,6 @@ const slides = [
   },
 ]
 
-function Sparkles({ active }) {
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    if (!active || !containerRef.current) return
-
-    const createSparkle = () => {
-      const sparkle = document.createElement("div")
-      sparkle.className = "sparkle"
-
-      const angle = Math.random() * Math.PI * 2
-      const radius = 80 + Math.random() * 40
-      const tx = Math.cos(angle) * radius
-      const ty = Math.sin(angle) * radius
-
-      sparkle.style.setProperty("--tx", `${tx}px`)
-      sparkle.style.setProperty("--ty", `${ty}px`)
-
-      const randomDelay = Math.random() * 0.2
-      sparkle.style.animationDelay = `${randomDelay}s`
-
-      containerRef.current?.appendChild(sparkle)
-
-      setTimeout(() => sparkle.remove(), 1200)
-    }
-
-    const interval = setInterval(createSparkle, 600)
-    return () => clearInterval(interval)
-  }, [active])
-
-  return <div ref={containerRef} className={`absolute w-full h-full pointer-events-none`} />
-}
-
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const videoRef = useRef(null)
@@ -178,29 +145,21 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Right Content - Images with Sparkles */}
+                {/* Right Content - Images with Animations */}
                 <div className="relative h-full hidden md:flex items-center justify-center">
-                  {index === 3 ? (
-                    <div className="relative w-64 h-64 flex items-center justify-center">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48">
-                        <Sparkles active={index === currentSlide} />
-                      </div>
-                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48">
-                        <Sparkles active={index === currentSlide} />
-                      </div>
-                      <img
-                        src={s.image || "/placeholder.svg"}
-                        alt={s.title}
-                        className="max-w-xs drop-shadow-2xl relative z-10"
-                      />
-                    </div>
-                  ) : (
-                    <img
-                      src={s.image || "/placeholder.svg"}
-                      alt={s.title}
-                      className={`max-w-md lg:max-w-lg drop-shadow-2xl ${index !== 0 ? "coffee-glow" : ""}`}
-                    />
-                  )}
+                  <img
+                    src={s.image || "/placeholder.svg"}
+                    alt={s.title}
+                    className={`max-w-md lg:max-w-lg drop-shadow-2xl ${
+                      index === 0
+                        ? "image-sway"
+                        : index === 1
+                          ? "image-float"
+                          : index === 2
+                            ? "image-tilt"
+                            : "image-pulse"
+                    }`}
+                  />
                 </div>
               </div>
             </div>
