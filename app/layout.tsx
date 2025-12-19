@@ -7,7 +7,7 @@ import "./globals.css"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://badempire.com"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.badempire.vip"
 const siteName = "Bad Empire Coffee Club"
 const siteDescription =
   "Premium coffee club and lifestyle destination in Upstate New York. Featuring artisan coffee subscriptions, barber services, French Bulldog breeding, custom jewelry, dart leagues, billiards, and gaming. Serving Albany, Troy, Watervliet, and the Capital Region community."
