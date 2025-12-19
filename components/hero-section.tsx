@@ -121,7 +121,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full min-h-screen pt-16 md:pt-20 overflow-hidden bg-black"
+      className="relative w-full min-h-screen pt-16 md:pt-32 lg:pt-20 overflow-hidden bg-black"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -142,7 +142,7 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-black/40" />
 
           {/* Content */}
-          <div className="relative h-full flex items-center justify-center">
+          <div className="relative w-full flex items-center justify-center py-8 md:py-12 lg:py-0 md:min-h-screen">
             <div className="w-full px-4 sm:px-8 lg:px-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-center max-w-6xl mx-auto">
                 {/* Left Content */}
