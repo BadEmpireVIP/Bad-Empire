@@ -121,7 +121,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full min-h-screen pt-20 sm:pt-24 md:pt-44 lg:pt-32 overflow-hidden bg-black"
+      className="relative w-full min-h-screen overflow-hidden bg-black flex flex-col items-center justify-center"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -142,13 +142,13 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-black/40" />
 
           {/* Content */}
-          <div className="relative w-full flex items-center justify-center py-4 sm:py-6 md:py-8 lg:py-12">
-            <div className="w-full px-3 sm:px-4 md:px-6 lg:px-16">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-3 lg:gap-6 items-center max-w-6xl mx-auto">
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="w-full px-3 sm:px-4 md:px-6 lg:px-16 py-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
                 {/* Left Content */}
                 <div className="text-center md:text-left flex flex-col justify-center">
                   <h1
-                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-1 sm:mb-2 md:mb-1 lg:mb-4 text-balance ${
+                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-3 sm:mb-4 md:mb-4 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-title" : ""
                     }`}
                     style={{
@@ -158,7 +158,7 @@ export function HeroSection() {
                     {s.title}
                   </h1>
                   <h2
-                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-1 sm:mb-2 md:mb-1 lg:mb-4 text-balance ${
+                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-3 sm:mb-4 md:mb-4 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-subtitle" : ""
                     }`}
                     style={{
@@ -168,7 +168,7 @@ export function HeroSection() {
                     {s.subtitle}
                   </h2>
                   <p
-                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-2 sm:mb-3 md:mb-2 lg:mb-8 text-balance ${
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-4 sm:mb-6 md:mb-6 lg:mb-8 text-balance ${
                       index === currentSlide ? "animate-slide-in-description" : ""
                     }`}
                     style={{
@@ -180,13 +180,13 @@ export function HeroSection() {
 
                   {/* Buttons */}
                   <div
-                    className={`flex flex-col sm:flex-row gap-1 sm:gap-2 md:gap-2 lg:gap-4 w-full md:w-auto justify-center md:justify-start ${
+                    className={`flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-3 lg:gap-4 w-full md:w-auto justify-center md:justify-start ${
                       index === currentSlide ? "animate-slide-in-buttons" : ""
                     }`}
                   >
                     <Button
                       onClick={s.cta1.action}
-                      className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-3 sm:px-6 md:px-5 py-1 sm:py-2 md:py-1 text-xs sm:text-sm md:text-xs rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
+                      className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-4 sm:px-6 md:px-6 py-2 sm:py-2 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
                     >
                       <ShoppingCart className="mr-2 h-4 w-4" />
                       {s.cta1.text}
@@ -194,7 +194,7 @@ export function HeroSection() {
                     <Button
                       onClick={s.cta2.action}
                       variant="outline"
-                      className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-3 sm:px-6 md:px-5 py-1 sm:py-2 md:py-1 text-xs sm:text-sm md:text-xs rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent whitespace-nowrap"
+                      className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-4 sm:px-6 md:px-6 py-2 sm:py-2 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent whitespace-nowrap"
                     >
                       <Coffee className="mr-2 h-4 w-4" />
                       {s.cta2.text}
@@ -204,7 +204,7 @@ export function HeroSection() {
 
                 {/* Right Content - Images with Animations */}
                 <div
-                  className={`relative w-full flex items-center justify-center md:h-full md:col-span-1 mt-2 md:mt-0 ${
+                  className={`relative w-full flex items-center justify-center md:h-full md:col-span-1 ${
                     index === currentSlide ? "animate-scale-in-image" : ""
                   }`}
                 >
@@ -213,10 +213,10 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-28 sm:w-40 md:w-24 lg:w-80 image-sway"
+                        ? "w-32 sm:w-48 md:w-40 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-28 sm:w-40 md:w-28 lg:w-72 image-float"
-                          : "w-32 sm:w-48 md:w-32 lg:w-96 image-pulse"
+                          ? "w-32 sm:w-40 md:w-40 lg:w-72 image-float"
+                          : "w-40 sm:w-56 md:w-48 lg:w-96 image-pulse"
                     }`}
                   />
                 </div>
