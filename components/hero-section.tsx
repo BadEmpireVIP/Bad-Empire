@@ -130,7 +130,7 @@ export function HeroSection() {
         <div
           key={s.id}
           className={`absolute inset-0 ${
-            index === currentSlide ? "z-10 opacity-100" : "z-0 opacity-0"
+            index === currentSlide ? "z-10 opacity-100 animate-slide-in-bg" : "z-0 opacity-0"
           } ${isTransitioning && index === currentSlide ? "slide-transitioning" : ""}`}
           style={{
             backgroundImage: s.background,
@@ -148,7 +148,9 @@ export function HeroSection() {
                 {/* Left Content */}
                 <div className="text-center md:text-left flex flex-col justify-center">
                   <h1
-                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-2 sm:mb-3 md:mb-4 text-balance`}
+                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-2 sm:mb-3 md:mb-4 text-balance ${
+                      index === currentSlide ? "animate-slide-in-title" : ""
+                    }`}
                     style={{
                       textShadow: "3px 3px 0 rgba(0,0,0,0.7), 6px 6px 0 rgba(0,0,0,0.5)",
                     }}
@@ -156,7 +158,9 @@ export function HeroSection() {
                     {s.title}
                   </h1>
                   <h2
-                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-2 sm:mb-3 md:mb-4 text-balance`}
+                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-2 sm:mb-3 md:mb-4 text-balance ${
+                      index === currentSlide ? "animate-slide-in-subtitle" : ""
+                    }`}
                     style={{
                       textShadow: "2px 2px 0 rgba(0,0,0,0.7), 4px 4px 0 rgba(0,0,0,0.5)",
                     }}
@@ -164,7 +168,9 @@ export function HeroSection() {
                     {s.subtitle}
                   </h2>
                   <p
-                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-4 sm:mb-6 md:mb-8 text-balance`}
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-4 sm:mb-6 md:mb-8 text-balance ${
+                      index === currentSlide ? "animate-slide-in-description" : ""
+                    }`}
                     style={{
                       textShadow: "1px 1px 0 rgba(0,0,0,0.7), 3px 3px 0 rgba(0,0,0,0.5)",
                     }}
@@ -173,7 +179,11 @@ export function HeroSection() {
                   </p>
 
                   {/* Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-3 lg:gap-4 w-full md:w-auto justify-center md:justify-start">
+                  <div
+                    className={`flex flex-col sm:flex-row gap-3 sm:gap-3 lg:gap-4 w-full md:w-auto justify-center md:justify-start ${
+                      index === currentSlide ? "animate-slide-in-buttons" : ""
+                    }`}
+                  >
                     <Button
                       onClick={s.cta1.action}
                       className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-6 sm:px-8 md:px-10 py-3 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
@@ -194,7 +204,9 @@ export function HeroSection() {
 
                 {/* Right Content - Images with Animations */}
                 <div
-                  className={`relative w-full flex items-center justify-center md:h-full md:col-span-1 mt-6 md:mt-0`}
+                  className={`relative w-full flex items-center justify-center md:h-full md:col-span-1 mt-6 md:mt-0 ${
+                    index === currentSlide ? "animate-scale-in-image" : ""
+                  }`}
                 >
                   <img
                     src={s.image || "/placeholder.svg"}

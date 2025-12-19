@@ -35,23 +35,32 @@ export function ContactSection() {
 
       <div className="container mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-slide-in-section">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 mb-6">
             <Mail className="h-4 w-4 text-neon-cyan" />
             <span className="text-sm text-neon-cyan font-medium">Get in Touch</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-slide-in-title"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.2s forwards" }}
+          >
             Contact the{" "}
             <span className="bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent">Empire</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p
+            className="text-xl text-foreground/70 max-w-2xl mx-auto animate-slide-in-description"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.4s forwards" }}
+          >
             Questions, feedback, or want to visit? We are here for you.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Form */}
-          <Card className="bg-card/50 border border-neon-pink/20">
+          <Card
+            className={`bg-card/50 border border-neon-pink/20 animate-slide-in-section`}
+            style={{ animation: "slideInFromLeft 0.8s ease-out 0.5s forwards", opacity: 0 }}
+          >
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -107,7 +116,10 @@ export function ContactSection() {
           </Card>
 
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div
+            className="space-y-6 animate-slide-in-section"
+            style={{ animation: "slideInFromRight 0.8s ease-out 0.5s forwards", opacity: 0 }}
+          >
             <Card className="bg-card/50 border border-neon-cyan/20">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">

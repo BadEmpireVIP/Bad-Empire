@@ -64,28 +64,38 @@ export function ProductsSection() {
 
       <div className="container mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-12 md:mb-16 animate-slide-in-section">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 mb-4 md:mb-6">
             <ShoppingBag className="h-3 w-3 md:h-4 md:w-4 text-neon-cyan" />
             <span className="text-xs md:text-sm text-neon-cyan font-medium">Coffee Lineup</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-foreground">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-foreground animate-slide-in-title"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.2s forwards" }}
+          >
             Choose Your{" "}
             <span className="bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent">
               Allegiance
             </span>
           </h2>
-          <p className="text-base md:text-xl text-foreground/70 max-w-2xl mx-auto px-2">
+          <p
+            className="text-base md:text-xl text-foreground/70 max-w-2xl mx-auto px-2 animate-slide-in-description"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.4s forwards" }}
+          >
             Two legendary roasts, each crafted for different moments of your empire.
           </p>
         </div>
 
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Card
               key={product.id}
-              className="group relative overflow-hidden bg-card/50 border border-foreground/10 hover:border-neon-pink/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(236,72,153,0.15)]"
+              className={`group relative overflow-hidden bg-card/50 border border-foreground/10 hover:border-neon-pink/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(236,72,153,0.15)] animate-slide-in-section`}
+              style={{
+                animation: `slideInFromBottom 0.8s ease-out ${0.4 + index * 0.2}s forwards`,
+                opacity: 0,
+              }}
             >
               <CardContent className="p-0">
                 <div className="relative h-48 md:h-80 bg-gradient-to-b from-foreground/5 to-transparent overflow-hidden">
