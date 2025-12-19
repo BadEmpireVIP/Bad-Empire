@@ -44,6 +44,7 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 className="text-foreground/80 hover:text-neon-pink transition-colors duration-300 font-medium tracking-wide uppercase text-sm"
+                style={{ fontFamily: "'Bradley Gratis', serif" }}
               >
                 {item.name}
               </Link>

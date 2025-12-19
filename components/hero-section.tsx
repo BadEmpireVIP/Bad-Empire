@@ -10,6 +10,7 @@ export function HeroSection() {
   const [cartItems, setCartItems] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const slides = [
     {
@@ -51,8 +52,18 @@ export function HeroSection() {
   }
 
   useEffect(() => {
-    if (currentSlide === 1 && videoRef.current) {
-      videoRef.current.play().catch((err) => console.log("[v0] Video play error:", err))
+    const video = videoRef.current
+    if (!video) return
+
+    if (currentSlide === 1) {
+      // Only play video on chains slide
+      video.currentTime = 0.5
+      video.play().catch((err) => {
+        console.log("[v0] Video play note:", err.message)
+      })
+    } else {
+      // Pause video when not on slide
+      video.pause()
     }
   }, [currentSlide])
 
@@ -102,6 +113,7 @@ export function HeroSection() {
 
   return (
     <section
+      ref={containerRef}
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
       style={{
@@ -127,59 +139,64 @@ export function HeroSection() {
         <div
           className={`w-full h-full flex items-center justify-center px-4 md:px-8 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
         >
-          <div className="w-full max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
-              <div className="flex flex-col justify-center max-w-md">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4 w-fit text-xs">
+          <div className="w-full max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Left Content */}
+              <div className="flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-6 w-fit text-xs">
                   <Crown className="h-3 w-3 text-neon-gold" />
                   <span className="text-neon-gold font-medium">
                     Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
                   </span>
                 </div>
 
-                <h1
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3 text-foreground leading-tight drop-shadow-lg"
-                  style={{ fontFamily: "'Bradley Gratis', serif" }}
-                >
-                  {slide.title}
-                </h1>
+                <div className="relative mb-4">
+                  <div className="absolute -inset-8 bg-gradient-radial from-black/40 via-black/20 to-transparent rounded-3xl blur-3xl" />
+                  <h1
+                    className="relative text-6xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight drop-shadow-lg"
+                    style={{ fontFamily: "'Bradley Gratis', serif" }}
+                  >
+                    {slide.title}
+                  </h1>
+                </div>
 
-                <p
-                  className="text-lg md:text-xl text-neon-cyan mb-3 font-semibold drop-shadow-md"
-                  style={{ fontFamily: "'Bradley Gratis', serif" }}
-                >
-                  {slide.subtitle}
-                </p>
+                <div className="relative mb-4">
+                  <div className="absolute -inset-4 bg-gradient-radial from-black/30 via-black/10 to-transparent rounded-2xl blur-2xl" />
+                  <p
+                    className="relative text-xl md:text-2xl lg:text-3xl text-neon-cyan font-semibold drop-shadow-md"
+                    style={{ fontFamily: "'Bradley Gratis', serif" }}
+                  >
+                    {slide.subtitle}
+                  </p>
+                </div>
 
-                <p className="text-sm md:text-base text-foreground/80 mb-6 leading-relaxed">{slide.content}</p>
+                <p className="text-base md:text-lg text-foreground/80 mb-8 leading-relaxed max-w-lg">{slide.content}</p>
 
-                <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <div className="flex flex-col sm:flex-row gap-4 w-full mb-6">
                   <Button
                     onClick={slide.cta1.action}
-                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200"
+                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-8 py-3 text-base rounded-lg hover:scale-105 transition-transform duration-200"
                   >
-                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    <ShoppingCart className="mr-2 h-5 w-5" />
                     {slide.cta1.text}
                   </Button>
                   <Button
                     onClick={slide.cta2.action}
                     variant="outline"
-                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent"
+                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-8 py-3 text-base rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent"
                   >
-                    <Coffee className="mr-2 h-4 w-4" />
+                    <Coffee className="mr-2 h-5 w-5" />
                     {slide.cta2.text}
                   </Button>
                 </div>
-
-                <div className="mt-4 text-xs text-neon-gold font-semibold">{cartItems} in cart</div>
               </div>
 
               {/* Right Image/Video */}
-              <div className="flex items-center justify-center lg:justify-end">
+              <div className="flex items-center justify-center lg:justify-end h-full">
                 {"images" in slide && slide.images && (
-                  <div className="flex gap-3 items-center justify-center">
+                  <div className="flex gap-6 items-center justify-center">
                     {slide.images.map((img, idx) => (
-                      <div key={idx} className="relative w-32 h-80 md:w-40 md:h-96">
+                      <div key={idx} className="relative w-40 h-96 md:w-48 md:h-[450px] lg:w-56 lg:h-[500px]">
                         <Image
                           src={img || "/placeholder.svg"}
                           alt={`Coffee bag ${idx + 1}`}
@@ -194,10 +211,9 @@ export function HeroSection() {
                 {"video" in slide && slide.video && (
                   <video
                     ref={videoRef}
-                    autoPlay
-                    loop
                     muted
-                    className={`w-full max-w-xs h-auto rounded-xl border border-neon-cyan/30 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+                    playsInline
+                    className="w-full max-w-md h-auto rounded-xl border border-neon-cyan/30 transition-opacity duration-500"
                     onTimeUpdate={(e) => {
                       if (e.currentTarget.currentTime >= 15) {
                         e.currentTarget.currentTime = 0.5
@@ -208,7 +224,7 @@ export function HeroSection() {
                   </video>
                 )}
                 {"image" in slide && slide.image && (
-                  <div className="relative w-56 h-80 md:w-64 md:h-96">
+                  <div className="relative w-64 h-96 md:w-72 md:h-[500px] lg:w-80 lg:h-[550px]">
                     <Image
                       src={slide.image || "/placeholder.svg"}
                       alt={slide.title}
