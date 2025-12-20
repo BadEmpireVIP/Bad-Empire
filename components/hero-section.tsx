@@ -54,9 +54,9 @@ export function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const titleSizeClass = "text-5xl sm:text-6xl md:text-5xl lg:text-8xl"
-  const subtitleSizeClass = "text-5xl sm:text-5xl md:text-xl lg:text-4xl"
-  const descriptionSizeClass = "text-sm sm:text-base md:text-sm lg:text-2xl"
+  const titleSizeClass = "text-6xl sm:text-7xl md:text-5xl lg:text-8xl"
+  const subtitleSizeClass = "text-4xl sm:text-5xl md:text-2xl lg:text-4xl"
+  const descriptionSizeClass = "text-base sm:text-lg md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
 
@@ -144,7 +144,7 @@ export function HeroSection() {
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center">
             <div className="w-full px-3 sm:px-4 md:px-8 lg:px-16 py-12 sm:py-14 md:py-10 lg:py-20">
-              <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-12 items-center max-w-6xl mx-auto h-full">
+              <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center max-w-7xl mx-auto h-full">
                 {/* Image Section - Stays top on mobile, moves right on tablet/desktop */}
                 <div
                   className={`relative w-full flex items-center justify-center md:order-last md:h-full md:col-span-1 ${
@@ -156,16 +156,16 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-48 sm:w-64 md:w-56 lg:w-80 image-sway"
+                        ? "w-56 sm:w-72 md:w-64 lg:w-96 image-sway"
                         : index === 1 || index === 2
-                          ? "w-32 sm:w-48 md:w-40 lg:w-48 image-float"
-                          : "w-64 sm:w-80 md:w-64 lg:w-96 image-pulse"
+                          ? "w-40 sm:w-56 md:w-48 lg:w-64 image-float"
+                          : "w-72 sm:w-96 md:w-80 lg:w-[32rem] image-pulse"
                     }`}
                   />
                 </div>
 
                 {/* Text Content - Stays middle on mobile, stays left on tablet/desktop */}
-                <div className="text-center md:text-left flex flex-col justify-center items-center md:items-start flex-1">
+                <div className="text-center md:text-left flex flex-col justify-center items-center md:items-start flex-1 w-full">
                   <h1
                     className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-4 sm:mb-6 md:mb-6 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-title" : ""
