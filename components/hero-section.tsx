@@ -143,29 +143,29 @@ export function HeroSection() {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center">
-            <div className="w-full px-3 sm:px-4 md:px-8 lg:px-16 py-12 sm:py-14 md:py-10 lg:py-20">
-              <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center max-w-7xl mx-auto h-full">
-                {/* Image Section - Stays top on mobile, moves right on tablet/desktop */}
+            <div className="w-full px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20 lg:py-24">
+              <div className="flex flex-col sm:grid sm:grid-cols-2 gap-8 sm:gap-6 md:gap-10 lg:gap-16 items-center max-w-7xl mx-auto h-full">
+                {/* Image Section - Moves right on tablet/desktop */}
                 <div
-                  className={`relative w-full flex items-center justify-center md:order-last md:h-full md:col-span-1 ${
+                  className={`relative w-full flex items-center justify-center sm:order-last sm:h-full sm:col-span-1 ${
                     index === currentSlide ? "animate-scale-in-image" : ""
                   }`}
                 >
                   <img
                     src={s.image || "/placeholder.svg"}
                     alt={s.title}
-                    className={`drop-shadow-2xl ${
+                    className={`drop-shadow-2xl object-contain ${
                       index === 0
-                        ? "w-56 sm:w-72 md:w-64 lg:w-96 image-sway"
+                        ? "w-48 sm:w-56 md:w-64 lg:w-96 image-sway"
                         : index === 1 || index === 2
-                          ? "w-40 sm:w-56 md:w-48 lg:w-64 image-float"
-                          : "w-72 sm:w-96 md:w-80 lg:w-[32rem] image-pulse"
+                          ? "w-32 sm:w-40 md:w-48 lg:w-64 image-float"
+                          : "w-48 sm:w-64 md:w-80 lg:w-[32rem] image-pulse"
                     }`}
                   />
                 </div>
 
-                {/* Text Content - Stays middle on mobile, stays left on tablet/desktop */}
-                <div className="text-center md:text-left flex flex-col justify-center items-center md:items-start flex-1 w-full">
+                {/* Text Content - Moves left on tablet/desktop */}
+                <div className="text-center sm:text-left flex flex-col justify-center items-center sm:items-start flex-1 w-full overflow-visible">
                   <h1
                     className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-4 sm:mb-6 md:mb-6 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-title" : ""
@@ -187,7 +187,7 @@ export function HeroSection() {
                     {s.subtitle}
                   </h2>
                   <p
-                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-8 sm:mb-10 md:mb-8 lg:mb-8 text-balance max-w-lg ${
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-8 sm:mb-10 md:mb-8 lg:mb-8 text-balance max-w-md sm:max-w-sm md:max-w-md ${
                       index === currentSlide ? "animate-slide-in-description" : ""
                     }`}
                     style={{
@@ -197,9 +197,9 @@ export function HeroSection() {
                     {s.description}
                   </p>
 
-                  {/* Buttons - Moved to bottom on mobile, side-by-side naturally */}
+                  {/* Buttons - Improved responsive layout */}
                   <div
-                    className={`flex flex-col sm:flex-row gap-4 sm:gap-4 md:gap-4 lg:gap-4 w-full sm:w-auto justify-center md:justify-start ${
+                    className={`flex flex-col sm:flex-row gap-4 sm:gap-3 md:gap-4 lg:gap-4 w-full sm:w-auto justify-center sm:justify-start ${
                       index === currentSlide ? "animate-slide-in-buttons" : ""
                     }`}
                   >
