@@ -54,9 +54,9 @@ export function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const titleSizeClass = "text-2xl sm:text-3xl md:text-xl lg:text-8xl"
-  const subtitleSizeClass = "text-sm sm:text-base md:text-sm lg:text-4xl"
-  const descriptionSizeClass = "text-xs sm:text-sm md:text-xs lg:text-2xl"
+  const titleSizeClass = "text-3xl sm:text-4xl md:text-3xl lg:text-8xl"
+  const subtitleSizeClass = "text-base sm:text-lg md:text-base lg:text-4xl"
+  const descriptionSizeClass = "text-sm sm:text-base md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
 
@@ -143,12 +143,12 @@ export function HeroSection() {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center">
-            <div className="w-full px-3 sm:px-4 md:px-6 lg:px-16 py-20">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+            <div className="w-full px-3 sm:px-4 md:px-8 lg:px-16 py-12 sm:py-14 md:py-10 lg:py-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
                 {/* Left Content */}
                 <div className="text-center md:text-left flex flex-col justify-center">
                   <h1
-                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-3 sm:mb-4 md:mb-4 lg:mb-6 text-balance ${
+                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-3 sm:mb-4 md:mb-6 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-title" : ""
                     }`}
                     style={{
@@ -158,7 +158,7 @@ export function HeroSection() {
                     {s.title}
                   </h1>
                   <h2
-                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-3 sm:mb-4 md:mb-4 lg:mb-6 text-balance ${
+                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-3 sm:mb-4 md:mb-6 lg:mb-6 text-balance ${
                       index === currentSlide ? "animate-slide-in-subtitle" : ""
                     }`}
                     style={{
@@ -168,7 +168,7 @@ export function HeroSection() {
                     {s.subtitle}
                   </h2>
                   <p
-                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-4 sm:mb-6 md:mb-6 lg:mb-8 text-balance ${
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-6 sm:mb-8 md:mb-8 lg:mb-8 text-balance ${
                       index === currentSlide ? "animate-slide-in-description" : ""
                     }`}
                     style={{
@@ -180,21 +180,20 @@ export function HeroSection() {
 
                   {/* Buttons */}
                   <div
-                    className={`flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-3 lg:gap-4 w-full md:w-auto justify-center md:justify-start ${
+                    className={`flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-4 lg:gap-4 w-full md:w-auto justify-center md:justify-start ${
                       index === currentSlide ? "animate-slide-in-buttons" : ""
                     }`}
                   >
                     <Button
                       onClick={s.cta1.action}
-                      className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-4 sm:px-6 md:px-6 py-2 sm:py-2 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
+                      className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/80 hover:to-neon-purple/80 text-white font-bold px-6 sm:px-8 md:px-6 py-3 sm:py-3 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap"
                     >
                       <ShoppingCart className="mr-2 h-4 w-4" />
                       {s.cta1.text}
                     </Button>
                     <Button
                       onClick={s.cta2.action}
-                      variant="outline"
-                      className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-4 sm:px-6 md:px-6 py-2 sm:py-2 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent whitespace-nowrap"
+                      className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/20 font-bold px-6 sm:px-8 md:px-6 py-3 sm:py-3 md:py-2 text-sm sm:text-base md:text-base rounded-lg hover:scale-105 transition-all duration-200 bg-black/30 whitespace-nowrap"
                     >
                       <Coffee className="mr-2 h-4 w-4" />
                       {s.cta2.text}
@@ -213,10 +212,10 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-32 sm:w-48 md:w-40 lg:w-80 image-sway"
+                        ? "w-48 sm:w-64 md:w-48 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-20 sm:w-28 md:w-24 lg:w-48 image-float"
-                          : "w-40 sm:w-56 md:w-48 lg:w-96 image-pulse"
+                          ? "w-36 sm:w-52 md:w-40 lg:w-48 image-float"
+                          : "w-52 sm:w-72 md:w-60 lg:w-96 image-pulse"
                     }`}
                   />
                 </div>
