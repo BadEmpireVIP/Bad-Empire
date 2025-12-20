@@ -54,8 +54,8 @@ export function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const titleSizeClass = "text-6xl sm:text-7xl md:text-5xl lg:text-8xl"
-  const subtitleSizeClass = "text-4xl sm:text-5xl md:text-2xl lg:text-4xl"
+  const titleSizeClass = "text-5xl sm:text-7xl md:text-5xl lg:text-8xl"
+  const subtitleSizeClass = "text-3xl sm:text-5xl md:text-2xl lg:text-4xl"
   const descriptionSizeClass = "text-base sm:text-lg md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
@@ -143,7 +143,7 @@ export function HeroSection() {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center">
-            <div className="w-full px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20 lg:py-24">
+            <div className="w-full px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20 lg:py-24 mt-4 sm:mt-6 lg:mt-8">
               <div className="flex flex-col sm:grid sm:grid-cols-2 gap-8 sm:gap-6 md:gap-10 lg:gap-16 items-center max-w-7xl mx-auto h-full">
                 {/* Image Section - Moves right on tablet/desktop */}
                 <div
