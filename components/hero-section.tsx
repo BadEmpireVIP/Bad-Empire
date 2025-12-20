@@ -50,6 +50,7 @@ const slides = [
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
   const videoRef = useRef(null)
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
@@ -60,19 +61,27 @@ export function HeroSection() {
 
   const slide = slides[currentSlide]
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
       setIsTransitioning(true)
       setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length)
         setIsTransitioning(false)
       }, 600)
     }, 8000)
-    return () => clearInterval(timer)
+  }
+
+  useEffect(() => {
+    startTimer()
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [])
 
   const goToSlide = (index) => {
     if (index !== currentSlide) {
+      startTimer()
       setIsTransitioning(true)
       setTimeout(() => {
         setCurrentSlide(index)
@@ -82,6 +91,7 @@ export function HeroSection() {
   }
 
   const nextSlide = () => {
+    startTimer()
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -90,6 +100,7 @@ export function HeroSection() {
   }
 
   const prevSlide = () => {
+    startTimer()
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
