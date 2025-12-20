@@ -7,7 +7,7 @@ import "./globals.css"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-const siteUrl = "https://badempire.com"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.badempire.vip"
 const siteName = "Bad Empire Coffee Club"
 const siteDescription =
   "Premium coffee club and lifestyle destination in Upstate New York. Featuring artisan coffee subscriptions, barber services, French Bulldog breeding, custom jewelry, dart leagues, billiards, and gaming. Serving Albany, Troy, Watervliet, and the Capital Region community."
@@ -297,7 +297,7 @@ export const metadata: Metadata = {
       "Join the Empire. Premium coffee subscriptions, French Bulldog breeding, barber services, custom jewelry, dart leagues, and gaming in Upstate New York. Serving Albany, Troy, Watervliet, and the Capital Region.",
     images: [
       {
-        url: "/images/socialsharing.png",
+        url: `${siteUrl}/images/socialsharing.png`,
         width: 1200,
         height: 630,
         alt: "Bad Empire Coffee Club - Premium Coffee & Lifestyle Club",
@@ -312,7 +312,7 @@ export const metadata: Metadata = {
     title: "Bad Empire Coffee Club | Premium Coffee & Lifestyle | Albany NY",
     description:
       "Join the Empire. Premium coffee, French Bulldogs, barber services, jewelry, darts, and gaming in Upstate New York.",
-    images: ["/images/socialsharing.png"],
+    images: [`${siteUrl}/images/socialsharing.png`],
     creator: "@badempireclub",
     site: "@badempireclub",
   },
@@ -376,7 +376,7 @@ export default function RootLayout({
         <style>{`
           @font-face {
             font-family: 'Bradley Gratis';
-            src: url('/Bradley Gratis.ttf') format('truetype');
+            src: url('/Bradley-Gratis.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
             font-display: swap;

@@ -1,254 +1,264 @@
 "use client"
 
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Coffee, Crown, ShoppingCart } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
+import { ChevronLeft, ChevronRight, ShoppingCart, Coffee } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const slides = [
+  {
+    id: 1,
+    title: "Bad Empire Coffee Club",
+    subtitle: "Join Our Exclusive Community",
+    description: "Experience the finest specialty coffee with our membership",
+    image: "/images/coloredcoffeeclub.png",
+    cta1: { text: "Join Club", action: () => console.log("Join club clicked") },
+    cta2: { text: "Learn More", action: () => console.log("Learn more clicked") },
+    background: "url(/images/badempirebg1.jpg)",
+  },
+  {
+    id: 2,
+    title: "Premium Dark Roast",
+    subtitle: "Boldly Crafted",
+    description: "Rich, full-bodied flavor with a smooth finish",
+    image: "/images/badempiredarkroast1-transparent.png",
+    cta1: { text: "Add to Cart", action: () => console.log("Dark roast added") },
+    cta2: { text: "Details", action: () => console.log("Dark roast details") },
+    background: "url(/images/badempirebg2.jpg)",
+  },
+  {
+    id: 3,
+    title: "Light Roast Blend",
+    subtitle: "Smooth & Bright",
+    description: "Delicate notes of citrus and floral undertones",
+    image: "/images/badempirelightroast-transparent.png",
+    cta1: { text: "Add to Cart", action: () => console.log("Light roast added") },
+    cta2: { text: "Details", action: () => console.log("Light roast details") },
+    background: "url(/images/badempirebg2.jpg)",
+  },
+  {
+    id: 4,
+    title: "Chain Supply",
+    subtitle: "Exceptional Quality",
+    description: "Curated selection from the finest suppliers",
+    image: "/images/chaintest.png",
+    cta1: { text: "Explore", action: () => console.log("Explore chain") },
+    cta2: { text: "Contact", action: () => console.log("Contact sales") },
+    background: "url(/images/badempirebg3.jpg)",
+  },
+]
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [cartItems, setCartItems] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const videoRef = useRef(null)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
 
-  const slides = [
-    {
-      id: "coffee",
-      title: "Empire Brews",
-      subtitle: "Legendary Coffee for the Bold",
-      content: "Discover our exclusive light and dark roasts crafted for the Bad Empire Coffee Club.",
-      images: ["/images/badempirelightroast-transparent.png", "/images/badempiredarkroast1-transparent.png"],
-      cta1: { text: "Shop Coffee", action: () => addToCart("Light Roast") },
-      cta2: { text: "Join Club", action: () => handleCTA("Join club clicked") },
-    },
-    {
-      id: "chains",
-      title: "Chain Lifestyle",
-      subtitle: "Bling and Brotherhood",
-      content: "Premium gold, silver, and scrap metal jewelry for the empire. Chains that tell your story.",
-      video: "/videos/chain1.mp4",
-      cta1: { text: "Browse Chains", action: () => handleCTA("Browse chains clicked") },
-      cta2: { text: "Custom Orders", action: () => handleCTA("Custom orders clicked") },
-    },
-    {
-      id: "social",
-      title: "Bad Empire Club",
-      subtitle: "French Bulldog Community and Social",
-      content: "Join our community of coffee lovers, frenchie enthusiasts, dart players, and friends in NY.",
-      image: "/images/frenchbulldog1tp.png",
-      cta1: { text: "Membership Plans", action: () => handleCTA("Membership clicked") },
-      cta2: { text: "Learn More", action: () => handleCTA("Learn more clicked") },
-    },
-  ]
+  const titleSizeClass = "text-5xl sm:text-7xl md:text-5xl lg:text-8xl"
+  const subtitleSizeClass = "text-3xl sm:text-5xl md:text-2xl lg:text-4xl"
+  const descriptionSizeClass = "text-base sm:text-lg md:text-sm lg:text-2xl"
 
-  const handleCTA = (action: string) => {
-    console.log(`[v0] Button clicked: ${action}`)
-  }
+  const slide = slides[currentSlide]
 
-  const addToCart = (product: string) => {
-    setCartItems((prev) => prev + 1)
-    console.log(`[v0] Added ${product} to cart. Total items: ${cartItems + 1}`)
-  }
-
-  useEffect(() => {
-    if (currentSlide === 1 && videoRef.current) {
-      videoRef.current.play().catch((err) => console.log("[v0] Video play error:", err))
-    }
-  }, [currentSlide])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
       setIsTransitioning(true)
       setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length)
         setIsTransitioning(false)
-      }, 500)
-    }, 10000)
-    return () => clearInterval(interval)
-  }, [slides.length])
+      }, 600)
+    }, 8000)
+  }
 
-  const goToSlide = (index: number) => {
-    console.log(`[v0] Navigating to slide ${index}`)
-    setIsTransitioning(true)
-    setTimeout(() => {
-      setCurrentSlide(index)
-      setIsTransitioning(false)
-    }, 500)
+  useEffect(() => {
+    startTimer()
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+  }, [])
+
+  const goToSlide = (index) => {
+    if (index !== currentSlide) {
+      startTimer()
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentSlide(index)
+        setIsTransitioning(false)
+      }, 600)
+    }
   }
 
   const nextSlide = () => {
+    startTimer()
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
       setIsTransitioning(false)
-    }, 500)
+    }, 600)
   }
 
   const prevSlide = () => {
+    startTimer()
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
       setIsTransitioning(false)
-    }, 500)
+    }, 600)
   }
 
-  const slide = slides[currentSlide]
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].screenX
+  }
 
-  const backgroundMap: { [key: number]: string | null } = {
-    0: "url('/images/badempirebg2.jpg')",
-    1: "url('/images/badempirebg3.jpg')",
-    2: "url('/images/badempirebg1.jpg')",
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].screenX
+    handleSwipe()
+  }
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50
+    const diff = touchStartX.current - touchEndX.current
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide()
+      } else {
+        prevSlide()
+      }
+    }
   }
 
   return (
     <section
-      id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
-      style={{
-        backgroundImage: backgroundMap[currentSlide],
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      className="relative w-full min-h-screen overflow-hidden bg-black flex flex-col items-center justify-center"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
-      <div
-        className={`absolute inset-0 transition-opacity duration-500 ${isTransitioning ? "opacity-100" : "opacity-0"} bg-black`}
-      />
-      <div className="absolute inset-0 bg-black/15" />
-
-      {/* Neon Grid Effect */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(236,72,153,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(236,72,153,0.1)_1px,transparent_1px)] bg-[size:100px_100px]" />
-      </div>
-
-      {/* Carousel Container */}
-      <div className="relative w-full h-full z-10 flex items-center justify-center">
-        {/* Slides */}
+      {/* Slides */}
+      {slides.map((s, index) => (
         <div
-          className={`w-full h-full flex items-center justify-center px-4 md:px-8 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+          key={s.id}
+          className={`absolute inset-0 ${
+            index === currentSlide ? "z-10 opacity-100 animate-slide-in-bg" : "z-0 opacity-0"
+          } ${isTransitioning && index === currentSlide ? "slide-transitioning" : ""}`}
+          style={{
+            backgroundImage: s.background,
+            backgroundSize: "cover",
+            backgroundPosition: index === 0 ? "right" : "center",
+          }}
         >
-          <div className="w-full max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="flex flex-col justify-center max-w-md">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4 w-fit text-xs">
-                  <Crown className="h-3 w-3 text-neon-gold" />
-                  <span className="text-neon-gold font-medium">
-                    Bad Empire {slide.id === "coffee" ? "Coffee" : slide.id === "chains" ? "Chains" : "Club"}
-                  </span>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Content */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="w-full px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20 lg:py-24 mt-4 sm:mt-6 lg:mt-8">
+              <div className="flex flex-col sm:grid sm:grid-cols-2 gap-8 sm:gap-6 md:gap-10 lg:gap-16 items-center max-w-7xl mx-auto h-full">
+                {/* Image Section - Moves right on tablet/desktop */}
+                <div
+                  className={`relative w-full flex items-center justify-center sm:order-last sm:h-full sm:col-span-1 ${
+                    index === currentSlide ? "animate-scale-in-image" : ""
+                  }`}
+                >
+                  <img
+                    src={s.image || "/placeholder.svg"}
+                    alt={s.title}
+                    className={`drop-shadow-2xl object-contain ${
+                      index === 0
+                        ? "w-48 sm:w-56 md:w-64 lg:w-96 image-sway"
+                        : index === 1 || index === 2
+                          ? "w-32 sm:w-40 md:w-48 lg:w-64 image-float"
+                          : "w-48 sm:w-64 md:w-80 lg:w-[32rem] image-pulse"
+                    }`}
+                  />
                 </div>
 
-                <h1
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-foreground leading-tight drop-shadow-lg"
-                  style={{ fontFamily: "'Bradley Gratis', serif" }}
-                >
-                  {slide.title}
-                </h1>
-
-                <p
-                  className="text-base md:text-lg text-neon-cyan mb-3 font-semibold drop-shadow-md"
-                  style={{ fontFamily: "'Bradley Gratis', serif" }}
-                >
-                  {slide.subtitle}
-                </p>
-
-                <p className="text-sm md:text-base text-foreground/80 mb-6 leading-relaxed">{slide.content}</p>
-
-                <div className="flex flex-col sm:flex-row gap-3 w-full">
-                  <Button
-                    onClick={slide.cta1.action}
-                    className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/90 hover:to-neon-purple/90 text-white font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200"
-                  >
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    {slide.cta1.text}
-                  </Button>
-                  <Button
-                    onClick={slide.cta2.action}
-                    variant="outline"
-                    className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 font-bold px-6 py-2 text-sm rounded-lg hover:scale-105 transition-transform duration-200 bg-transparent"
-                  >
-                    <Coffee className="mr-2 h-4 w-4" />
-                    {slide.cta2.text}
-                  </Button>
-                </div>
-
-                <div className="mt-4 text-xs text-neon-gold font-semibold">Cart Items: {cartItems}</div>
-              </div>
-
-              {/* Right Image/Video */}
-              <div className="flex items-center justify-center lg:justify-end">
-                {"images" in slide && slide.images && (
-                  <div className="flex gap-3 items-center justify-center">
-                    {slide.images.map((img, idx) => (
-                      <div key={idx} className="relative w-32 h-80 md:w-40 md:h-96">
-                        <Image
-                          src={img || "/placeholder.svg"}
-                          alt={`Coffee bag ${idx + 1}`}
-                          fill
-                          className="object-contain"
-                          priority
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {"video" in slide && slide.video && (
-                  <video
-                    ref={videoRef}
-                    autoPlay
-                    loop
-                    muted
-                    className={`w-full max-w-xs h-auto rounded-xl border border-neon-cyan/30 transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
-                    onTimeUpdate={(e) => {
-                      if (e.currentTarget.currentTime >= 15) {
-                        e.currentTarget.currentTime = 0.5
-                      }
+                {/* Text Content - Moves left on tablet/desktop */}
+                <div className="text-center sm:text-left flex flex-col justify-center items-center sm:items-start flex-1 w-full overflow-visible">
+                  <h1
+                    className={`${titleSizeClass} font-bradley text-white drop-shadow-2xl mb-4 sm:mb-6 md:mb-6 lg:mb-6 text-balance ${
+                      index === currentSlide ? "animate-slide-in-title" : ""
+                    }`}
+                    style={{
+                      textShadow: "3px 3px 0 rgba(0,0,0,0.7), 6px 6px 0 rgba(0,0,0,0.5)",
                     }}
                   >
-                    <source src={slide.video} type="video/mp4" />
-                  </video>
-                )}
-                {"image" in slide && slide.image && (
-                  <div className="relative w-56 h-80 md:w-64 md:h-96">
-                    <Image
-                      src={slide.image || "/placeholder.svg"}
-                      alt={slide.title}
-                      fill
-                      className="object-contain"
-                      priority
-                    />
+                    {s.title}
+                  </h1>
+                  <h2
+                    className={`${subtitleSizeClass} text-neon-cyan drop-shadow-lg mb-4 sm:mb-6 md:mb-6 lg:mb-6 text-balance ${
+                      index === currentSlide ? "animate-slide-in-subtitle" : ""
+                    }`}
+                    style={{
+                      textShadow: "2px 2px 0 rgba(0,0,0,0.7), 4px 4px 0 rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    {s.subtitle}
+                  </h2>
+                  <p
+                    className={`${descriptionSizeClass} text-gray-200 drop-shadow-lg mb-8 sm:mb-10 md:mb-8 lg:mb-8 text-balance max-w-md sm:max-w-sm md:max-w-md ${
+                      index === currentSlide ? "animate-slide-in-description" : ""
+                    }`}
+                    style={{
+                      textShadow: "1px 1px 0 rgba(0,0,0,0.7), 3px 3px 0 rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    {s.description}
+                  </p>
+
+                  {/* Buttons - Improved responsive layout */}
+                  <div
+                    className={`flex flex-col sm:flex-row gap-4 sm:gap-3 md:gap-4 lg:gap-4 w-full sm:w-auto justify-center sm:justify-start ${
+                      index === currentSlide ? "animate-slide-in-buttons" : ""
+                    }`}
+                  >
+                    <Button
+                      onClick={s.cta1.action}
+                      className="bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink/80 hover:to-neon-purple/80 text-white font-bold px-8 py-4 md:px-6 md:py-2 text-base md:text-base rounded-lg hover:scale-105 transition-transform duration-200 whitespace-nowrap sm:w-auto"
+                    >
+                      <ShoppingCart className="mr-2 h-4 w-4" />
+                      {s.cta1.text}
+                    </Button>
+                    <Button
+                      onClick={s.cta2.action}
+                      className="border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/20 font-bold px-8 py-4 md:px-6 md:py-2 text-base md:text-base rounded-lg hover:scale-105 transition-all duration-200 bg-black/30 whitespace-nowrap sm:w-auto"
+                    >
+                      <Coffee className="mr-2 h-4 w-4" />
+                      {s.cta2.text}
+                    </Button>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
         </div>
+      ))}
 
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-neon-pink/20 hover:bg-neon-pink/40 border border-neon-pink/50 rounded-full p-3 transition-all hover:scale-110"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="h-6 w-6 text-neon-pink" />
-        </button>
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="hidden md:block absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="hidden md:block absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
 
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-neon-cyan/20 hover:bg-neon-cyan/40 border border-neon-cyan/50 rounded-full p-3 transition-all hover:scale-110"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="h-6 w-6 text-neon-cyan" />
-        </button>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+      {/* Dots Navigation */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all rounded-full ${
-              index === currentSlide ? "bg-neon-pink h-3 w-8" : "bg-neon-pink/30 hover:bg-neon-pink/50 h-3 w-3"
+            className={`w-3 h-3 rounded-full transition-all ${
+              index === currentSlide ? "bg-neon-cyan w-8" : "bg-white/50 hover:bg-white/80"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

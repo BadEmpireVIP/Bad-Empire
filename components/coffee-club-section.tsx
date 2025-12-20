@@ -65,32 +65,42 @@ export function CoffeeClubSection() {
 
       <div className="container mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-12 md:mb-16 animate-slide-in-section">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-neon-gold/10 border border-neon-gold/30 mb-4 md:mb-6">
             <Sword className="h-3 w-3 md:h-4 md:w-4 text-neon-gold" />
             <span className="text-xs md:text-sm text-neon-gold font-medium">Membership Tiers</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 animate-slide-in-title"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.2s forwards" }}
+          >
             <span className="text-foreground">Bad Empire</span>{" "}
             <span className="bg-gradient-to-r from-neon-gold to-amber-400 bg-clip-text text-transparent">
               Coffee Club
             </span>
           </h2>
-          <p className="text-base md:text-xl text-foreground/70 max-w-2xl mx-auto px-2">
+          <p
+            className="text-base md:text-xl text-foreground/70 max-w-2xl mx-auto px-2 animate-slide-in-description"
+            style={{ opacity: 1, animation: "slideInTitle 0.8s ease-out 0.4s forwards" }}
+          >
             Swear fealty to the brew. Two houses, endless nights.
           </p>
         </div>
 
         {/* Membership Cards */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12 md:mb-20">
-          {membershipTiers.map((tier) => (
+          {membershipTiers.map((tier, index) => (
             <Card
               key={tier.name}
-              className={`relative overflow-hidden transition-all duration-500 hover:scale-[1.02] ${
+              className={`relative overflow-hidden transition-all duration-500 hover:scale-[1.02] animate-slide-in-section ${
                 tier.featured
                   ? "bg-gradient-to-b from-neon-gold/10 to-background border-2 border-neon-gold/50 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
                   : "bg-card/50 border border-neon-pink/20 hover:border-neon-pink/40"
               }`}
+              style={{
+                animation: `slideInFromBottom 0.8s ease-out ${0.4 + index * 0.2}s forwards`,
+                opacity: 0,
+              }}
             >
               {tier.featured && (
                 <div className="absolute top-3 md:top-4 right-3 md:right-4 px-2.5 md:px-3 py-0.5 md:py-1 bg-neon-gold text-background text-xs font-bold rounded-full">
@@ -149,11 +159,21 @@ export function CoffeeClubSection() {
         </div>
 
         {/* How It Works */}
-        <div className="max-w-4xl mx-auto">
+        <div
+          className="max-w-4xl mx-auto animate-slide-in-section"
+          style={{ animation: "slideInFromBottom 0.8s ease-out 0.8s forwards", opacity: 0 }}
+        >
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-10 text-foreground">How It Works</h3>
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {steps.map((step, index) => (
-              <div key={index} className="text-center group px-2">
+              <div
+                key={index}
+                className="text-center group px-2 animate-slide-in-section"
+                style={{
+                  animation: `slideInFromBottom 0.8s ease-out ${1 + index * 0.1}s forwards`,
+                  opacity: 0,
+                }}
+              >
                 <div className="relative inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-neon-pink/10 border-2 border-neon-pink/30 mb-3 md:mb-4 group-hover:border-neon-pink transition-colors">
                   <span className="text-xl md:text-2xl font-bold text-neon-pink">{step.step}</span>
                 </div>
