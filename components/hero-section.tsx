@@ -55,7 +55,7 @@ export function HeroSection() {
   const touchEndX = useRef(0)
 
   const titleSizeClass = "text-5xl sm:text-6xl md:text-5xl lg:text-8xl"
-  const subtitleSizeClass = "text-4xl sm:text-4xl md:text-xl lg:text-4xl"
+  const subtitleSizeClass = "text-5xl sm:text-5xl md:text-xl lg:text-4xl"
   const descriptionSizeClass = "text-sm sm:text-base md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
@@ -144,7 +144,7 @@ export function HeroSection() {
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center">
             <div className="w-full px-3 sm:px-4 md:px-8 lg:px-16 py-12 sm:py-14 md:py-10 lg:py-20">
-              <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-8 lg:gap-12 items-center max-w-6xl mx-auto h-full">
+              <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-12 items-center max-w-6xl mx-auto h-full">
                 {/* Image Section - Stays top on mobile, moves right on tablet/desktop */}
                 <div
                   className={`relative w-full flex items-center justify-center md:order-last md:h-full md:col-span-1 ${
@@ -156,10 +156,10 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-48 sm:w-64 md:w-64 lg:w-80 image-sway"
+                        ? "w-48 sm:w-64 md:w-56 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-32 sm:w-48 md:w-56 lg:w-48 image-float"
-                          : "w-64 sm:w-80 md:w-72 lg:w-96 image-pulse"
+                          ? "w-32 sm:w-48 md:w-40 lg:w-48 image-float"
+                          : "w-64 sm:w-80 md:w-64 lg:w-96 image-pulse"
                     }`}
                   />
                 </div>
