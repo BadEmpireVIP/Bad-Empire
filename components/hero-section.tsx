@@ -55,7 +55,7 @@ export function HeroSection() {
   const touchEndX = useRef(0)
 
   const titleSizeClass = "text-5xl sm:text-6xl md:text-5xl lg:text-8xl"
-  const subtitleSizeClass = "text-xl sm:text-2xl md:text-xl lg:text-4xl"
+  const subtitleSizeClass = "text-4xl sm:text-4xl md:text-xl lg:text-4xl"
   const descriptionSizeClass = "text-sm sm:text-base md:text-sm lg:text-2xl"
 
   const slide = slides[currentSlide]
@@ -156,9 +156,9 @@ export function HeroSection() {
                     alt={s.title}
                     className={`drop-shadow-2xl ${
                       index === 0
-                        ? "w-64 sm:w-80 md:w-64 lg:w-80 image-sway"
+                        ? "w-48 sm:w-64 md:w-64 lg:w-80 image-sway"
                         : index === 1 || index === 2
-                          ? "w-48 sm:w-64 md:w-56 lg:w-48 image-float"
+                          ? "w-32 sm:w-48 md:w-56 lg:w-48 image-float"
                           : "w-64 sm:w-80 md:w-72 lg:w-96 image-pulse"
                     }`}
                   />
